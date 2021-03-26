@@ -1,0 +1,4 @@
+dobro x = x * 2
+quadruplo x = dobro(dobro x)
+hip a b = sqrt(a**2+b**2)
+dis xa ya xb yb = sqrt((xa-xb)**2+(ya-yb)**2)
