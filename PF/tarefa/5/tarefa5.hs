@@ -48,11 +48,12 @@ comprime [] = []
 comprime [x] = [x]
 comprime [x:xs] = uniaoR x:xs
 --5-
-tamanho :: [t] -> [Int]
+tamanho :: [t] -> Int
 tamanho [] = 0
 tamanho [x:xs] = 1+tamanho xs
 --6-
 uniaoRec2 :: [t] -> [t] -> [t]
 uniaoRec2 x [] = x
-uniaoRec2 [] x = x
-uniaoRec2 [y:ys] [x:xs] =    
+uniaoRec2 x [y:ys] =  if pertence y xs then uniaoRec2 x ys
+                        else uniaoRec2 (x++[y]) ys
+                        
