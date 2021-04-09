@@ -107,3 +107,54 @@ contagem elem [] = 0
 contagem elem (x:xs) =if x == elem then 1 + contagem elem xs else 0 + conta elem xs
 unica_ocorrencia :: t -> [t] -> Bool
 unica_ocorrencia elem lista = if (contagem elem lista) != 1 then True else False
+--12-
+intercala :: [t] -> [t] -> [t]
+intercala x [] = x 
+intercala [] x = x
+intercala (x:xs) (y:ys) = x : y : intercala xs ys
+--13-
+zipar :: [t] -> [t] ->[[(t,t)]]
+zipar x [] = []
+zipar [] x = []
+zipar (x:xs) (y:ys) = [x,y] : zipar xs ys
+--14-
+type Contato = (Str,Str,Str,Str)
+recuperar :: Str -> Contato -> Str
+recuperar aux (nome,_,_,email) = if aux==email then nome else "Email desconhecido"
+--15-
+type Pessoa = (String, Float, Int, Char)
+pessoas :: [Pessoa]
+pessoas = [ ("Rosa", 1.66, 27,'S'),
+("João", 1.85, 26, 'C'),
+("Maria", 1.55, 62, 'S'),
+("Jose", 1.78, 42, 'C'),
+("Paulo", 1.93, 25, 'S'),
+("Clara", 1.70, 33, 'C'),
+("Bob", 1.45, 21, 'C'),
+("Rosana", 1.58,39, 'S'),
+("Daniel", 1.74, 72, 'S'),
+("Jocileide", 1.69, 18, 'S') ]
+conta :: [t] -> Int
+conta [] = 0
+conta (_:xs) = 1 + conta xs
+medheight :: [Pessoa] -> Float
+medheight [(_,x,_,_),xs]  = (x + medheight xs)/conta [(_,x,_,_),xs]
+--
+youngest :: [Pessoa] -> Int
+youngest [x,y] = if x<y then x else y
+youngest [(_,_,x,_):(_,_,y,_):xs] = if x<y then youngest [(_,_,x,_):xs]
+                                      else [(_,_,y,_):xs]
+--
+ageSum :: [Pessoa] -> Int
+ageSum [] = 0
+ageSum [(_,_,x,_),xs] = x + ageSum xs
+oldestname :: [Pessoa] -> (Str,Str)
+oldestname [(nome,_,idade,ec),xs] = if [(nome,_,idade,ec),xs] == idade then (nome,ec) 
+                                      else oldestname xs
+--
+olderThan50 :: [Pessoa] -> [Pessoa]
+olderThan50 [(_,_,idade,_),xs] = [x |x<-[(_,_,idade,_),xs],idade>=50]
+--  
+marriedOlderThan :: Int -> [Pessoa] -> Int
+marriedOlderThan x [(_,_,idade,ec),xs] =  [length y |y<-[(_,_,idade,ec),xs],idade >= x,ec == 'C']
+--                                 
