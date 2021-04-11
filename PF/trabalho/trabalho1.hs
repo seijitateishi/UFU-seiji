@@ -38,19 +38,20 @@ onibus preco (diahj,meshj,anohj) (diab,mesb,anob) = if precede (diahj,meshj,anoh
 gera1 :: [Int] -> [Int]
 gera1 y = [x*x*x|x<-y,even(x),x>0,x<21]
 --b)
-gera2 :: [Int] -> ((Int),(Int))
-gera2 z = [(x,y)|x<=5,y<-[x..3*x]]
+gera2 :: [Int] -> [(Int,Int)]
+gera2 z = [(x,y) |x <- z, x <= 5,y <- [x..3*x]]
 --c)
-l1=[15,16]
-gera3 :: [Int]
-gera3 = [x |x<- [1..l1]]
+l1 = [15,16]
+gera3 :: [Int] -> [Int]
+gera3 [] = []
+gera3 (x:xs) = [y |y<-[1..x]] ++ gera3 xs
 --d)
 gera4 :: [(Int,Int)]
 gera4 = [(x,y)|x<-[1..10],y<-[1..10],even x,y==x+1]
 --e
 gera5 :: [(Int,Int)] -> [Int]
 gera [] = []
-gera5 ((x,y),xs) = [a+b |a<-[x,xs],b<-[y,xs]]
+gera5 lista = [a + b |(a,b)<-gera4]
 --5-
 --a
 conta :: [t] -> Int
@@ -58,7 +59,7 @@ conta [] = 0
 conta (_:xs) = 1 + conta xs
 --
 contaNegM2 :: [Int] -> Int
-contaNegM2 lista = [conta(x) |x<- lista,x>0,mod x 3==0]
+contaNegM2 lista = conta ([x |x<- lista,x>0,mod x 3==0])
 --b
 listaNegM2 :: [Int] -> [Int]
 listaNegM2 lista = [x |x<- lista,x>0,mod x 3==0]
@@ -83,17 +84,19 @@ mmc3 :: Int -> Int -> Int -> Int
 mmc3 a b c = mmc2 a (mmc2 b c)
 --8-
 serie :: Float -> Float -> [Float]
-serie x n =if n>0 then 
-  if odd n then n/x + serie x n-1 else
-  x/n + serie x n-1
-  else 0
+serie x n = if n>0 
+              then  if odd n 
+                      then (n/x) : (serie x (n-1)) 
+                    else (x/n) : (serie x (n-1))
+            else 0
 --9-
 fizzbuzzAux :: Int -> [String]
 fizzbuzzAux 1 = ["No"]
-fizzbuzzAux n  |mod n 2 == 0 && mod n 3 == 0 = "FizzBuzz" 
-               |mod n 2 == 0 = "Fizz"
-               |mod n 3 == 0 = "Buzz"
-               |otherwise = "No"
+fizzbuzzAux n  
+  |mod n 2 == 0 && mod n 3 == 0 = "FizzBuzz" : fizzbuzzAux (n-1) 
+  |mod n 2 == 0 = "Fizz" : fizzbuzzAux (n-1)
+  |mod n 3 == 0 = "Buzz" : fizzbuzzAux (n-1)
+  |otherwise = "No" : fizzbuzzAux (n-1)
 fizzbuzz :: Int -> [String]
 fizzbuzz n = reverte (fizzbuzzAux (n))
 --10-
@@ -117,10 +120,10 @@ intercala x [] = x
 intercala [] x = x
 intercala (x:xs) (y:ys) = x : y : intercala xs ys
 --13-
-zipar :: [t] -> [t] ->[[(t,t)]]
+zipar :: [t] -> [t] ->[(t,t)]
 zipar x [] = []
 zipar [] x = []
-zipar (x:xs) (y:ys) = [x,y] : zipar xs ys
+zipar (x:xs) (y:ys) = (x,y) : zipar xs ys
 --14-
 type Contato = (String,String,String,String)
 recuperar :: String -> Contato -> String
@@ -138,29 +141,38 @@ pessoas = [("Rosa", 1.66, 27,'S'),
            ("Rosana", 1.58,39, 'S'),
            ("Daniel", 1.74, 72, 'S'),
            ("Jocileide", 1.69, 18, 'S')]
+contaF :: [t] -> Float
+contaF [] = 0
+contaF (_:xs) = 1 + contaF xs
+heightSum :: [Pessoa] -> Float
+heightSum [(_,x,_,_)] = x
+heightSum ((_,x,_,_):xs) = x + heightSum xs     
 medheight :: [Pessoa] -> Float
-medheight [(_,x,_,_),xs]  = (x + medheight xs)/(conta [(_,x,_,_),xs])
+medheight lista  = (heightSum lista) / (contaF lista)
 --
 youngest :: [Pessoa] -> Int
-youngest [x,y] = if x<y then x else y
-youngest [(_,_,x,_):(_,_,y,_):xs] = if x<y then youngest [(_,_,x,_):xs]
-                                      else [(_, _, y,_):xs]
+youngest [(_,_,x,_)] = x
+youngest ((n1,h1,x,ec1):(n2,h2,y,ec2):xs) = if x<y then youngest ((n1,h1,x,ec1):xs)
+                                      else youngest ((n2,h2,y,ec2):xs)
 --
 ageSum :: [Pessoa] -> Int
 ageSum [] = 0
-ageSum [(_, _, x, _),xs] = x + ageSum xs
-oldestname :: [Pessoa] -> (String,String)
-oldestname ((nome, _, idade, ec),xs) = if ((nome, _, idade,ec),xs) == idade then (nome,ec) 
-                                      else oldestname xs
+ageSum ((_,_,x,_):xs) = x + ageSum xs
+oldestname :: [Pessoa] -> (String,Char)
+oldestname [(nome1,h1,idade1,ec1),(nome2,h2,idade2,ec2)] 
+  |idade1 > idade2 = (nome1,ec1)
+  |otherwise = (nome2,ec2)
+oldestname ((nome1,h1,idade1,ec1):(nome2,h2,idade2,ec2):xs) = if idade1 >= idade2 then oldestname ((nome1,h1,idade1,ec1):xs)  
+                                      else oldestname ((nome2,h2,idade2,ec2):xs)
 --
 olderThan50 :: [Pessoa] -> [Pessoa]
-olderThan50 ((_, _, idade, _),xs) = [x |x<-[(_, _, idade,_),xs],idade>=50]
+olderThan50 ((n,h,idade,ec):xs) = [x |x<-((n,h,idade,ec):xs),idade>=50]
 --  
 marriedOlderThan :: Int -> [Pessoa] -> Int
-marriedOlderThan x ((_, _, idade, ec),xs) =  [length y |y<-[(_,_,idade,ec),xs],idade >= x,ec == 'C']
+marriedOlderThan x ((n,h,idade,ec):xs) =  conta ([y |y<-((n,h,idade,ec):xs),idade >= x,ec == 'C'])
 --16
 insere_ord :: t -> [t] -> [t]
-insere_ord elem [] = elem
+insere_ord elem [] = [elem]
 insere_ord elem (x:xs) 
   |x >= elem = elem : x : xs
   |otherwise = x : insere_ord elem xs
