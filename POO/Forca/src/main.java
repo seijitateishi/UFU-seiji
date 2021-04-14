@@ -1,4 +1,4 @@
-import java.util.Scanner;
+/*import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 public class main {
     public static void public static void main(String[] args) {
@@ -16,4 +16,4 @@ public class main {
             }     
         }
     }
-}
+}*/

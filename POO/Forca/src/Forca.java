@@ -1,4 +1,4 @@
-public class Forca {
+/*public class Forca {
     String word = "palavra";
     int tam = word.length();
     String[] guessedLetters = new String[tam];
@@ -30,4 +30,4 @@ public class Forca {
         
     }
     }
-}
+}*/

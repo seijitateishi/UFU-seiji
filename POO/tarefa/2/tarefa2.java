@@ -1,10 +1,10 @@
-public class Ponto {
+/*public class Ponto {
     private float x;
     private float y;
 
     public float distancia(float ax, float ay, float bx, float by){
         return sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by));
-    }/*retorna a distancia de dois pontos*/
+    }/*retorna a distancia de dois pontos
 
     public float getx(){
         return x;
