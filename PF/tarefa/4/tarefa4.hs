@@ -32,7 +32,7 @@ bissexto ano
   |mod ano 4 == 0 = True
   |otherwise = False
 bissextos:: [Int]->[Int]
-bissextos anos = [x|x<-anos,bissexto x]
+bissextos anos = [x |x<-anos,bissexto x]
 
 --9-
 sublistas :: [[Int]]->[Int]
