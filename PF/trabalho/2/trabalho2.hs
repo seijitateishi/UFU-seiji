@@ -47,6 +47,7 @@ trocas1 (x:y:zs, i)
     where   (lst1,j1) = trocas1(x:zs, i+1)   -- como inverte x com y soma 1 no contador
             (lst2,j2) = trocas1(y:zs, i) 
 
+
 selecao :: (Ord a) => [a] -> [a]
 selecao [] = []
 selecao xs = [x] ++ selecao (remove x xs)
@@ -64,4 +65,21 @@ minimo [] = undefined
 minimo [x] = x
 minimo (x:xs)
   |x <= (minimo xs) = x
-  |otherwise = minimo xs         
+  |otherwise = minimo xs    
+
+selecaofoldr :: (Ord a) => [a] -> [a]
+selecaofoldr [] = []
+selecaofoldr xs = [x] ++ selecaofoldr (remove x xs)
+  where 
+    x = foldr1 min xs
+
+insercao :: (Ord a) => [a] -> [a]
+insercao [] = []
+insercao (x:xs) = insereOrd x (insercao xs)
+
+insereOrd :: (Ord a) => a -> [a] -> [a]
+insereOrd x [] = [x]
+insereOrd x (y:ys)
+  |x <= y = (x:y:ys)
+  |otherwise = y : (insereOrd x ys)    
+
