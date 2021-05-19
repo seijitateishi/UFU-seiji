@@ -29,16 +29,39 @@ troca (x:y:zs)
   |otherwise = x : troca (y:zs)
 --
 --variação 1
-bolha1 :: Ord a => [a] -> [a]
-bolha1 [] = []
-bolha1 lista = bolhaOrd1 lista (length lista)
+bolha1 :: (Num b, Ord a) => [a] -> ([a], b)
+bolha1 [] = ([], 0)
+bolha1 lista = bolhaOrd1 lista 0 (length lista)
 
-bolhaOrd1 :: Ord a => [a] -> Int -> [a]
-bolhaOrd1 lista 0 = lista
-bolhaOrd1 lista n = bolhaOrd1 (troca1 lista) (n-1)
+bolhaOrd1 :: (Eq t1, Num t1, Ord a, Num t2) => [a] -> t2 -> t1 -> ([a], t2)
+bolhaOrd1 lista i 0 = (lista,i)
+bolhaOrd1 lista i n = bolhaOrd1 lst j (n-1)
+    where (lst,j) = trocas1 (lista,i)
 
-troca1 :: Ord a => [a] -> [a]
-troca1 [x] = [x]
-troca1 (x:y:zs)
-  |x > y = y : troca1 (x:zs)
-  |otherwise = x : troca1 (y:zs)
+
+trocas1 :: (Ord a, Num b) => ([a], b) -> ([a], b)
+trocas1 ([x],i) = ([x],i)
+trocas1 (x:y:zs, i)
+    | x > y = (y:lst1, j1)
+    | otherwise = (x:lst2, j2)
+    where   (lst1,j1) = trocas1(x:zs, i+1)   -- como inverte x com y soma 1 no contador
+            (lst2,j2) = trocas1(y:zs, i) 
+
+selecao :: (Ord a) => [a] -> [a]
+selecao [] = []
+selecao xs = [x] ++ selecao (remove x xs)
+  where 
+    x = minimo xs
+
+remove :: (Ord a) => a -> [a] -> [a]
+remove a [] = []
+remove a (x:xs)
+  |a == x = xs
+  |otherwise = x : (remove a xs)
+
+minimo :: (Ord a) => [a] -> a
+minimo [] = undefined
+minimo [x] = x
+minimo (x:xs)
+  |x <= (minimo xs) = x
+  |otherwise = minimo xs         
