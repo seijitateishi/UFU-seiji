@@ -13,7 +13,7 @@ x5=[11,12,13,14,15,5,4,3,2,1,16,17,18,19,20,10,9,8,7,6]
 x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
-{- QuickSort original -}
+{- QuickSort original -} -- FALTA O CONTADOR DO QUICKSORT
 quicksort :: Ord a => [a] -> [a]
 quicksort [] = []
 quicksort (s:xs) = quicksort [x |x <- xs, x < s] ++ [s] ++ quicksort [x |x <- xs, x >= s]
@@ -23,22 +23,22 @@ menores serem encontrados com buscas independentes, que seja elaborada e utiliza
 função divide que percorre a lista uma única vez, retornando os elementos menores em uma
 lista e os elementos menores em outra.
 EX: > divide 'j' "pindamonhangaba" Resposta: ("idahagaba","pnmonn") -}
-quicksort1 :: Ord a => [a] -> [a]
-quicksort1 [] = []
-quicksort1 (s:xs) = lista1 ++ [s] ++ lista2
+quicksort1 :: Ord a => [a] -> ([a], Int)
+quicksort1 [] = ([], 0)
+quicksort1 (s:xs) = (lista1 ++ [s] ++ lista2, cnt1+cnt2+cnt3)
     where
-        (l1, l2) = divide s xs
-        lista1 = quicksort1 l1
-        lista2 = quicksort1 l2
+        (l1, l2, cnt1) = divide s xs
+        (lista1, cnt2) = quicksort1 l1
+        (lista2, cnt3) = quicksort1 l2
 
-divide :: Ord a => a -> [a] -> ([a], [a])
-divide x [] = ([], [])
+divide :: Ord a => a -> [a] -> ([a], [a], Int)
+divide x [] = ([], [], 0)
 --divide x lst = (filter (< x) lst, filter (>= x) lst)
 divide x (y:ys)
-    | y < x = (y : l1, l2)
-    | otherwise  = (l1, y : l2)
+    | y < x = (y : l1, l2, n+1)
+    | otherwise  = (l1, y : l2, n+1)
     where
-        (l1, l2) = divide x ys
+        (l1, l2, n) = divide x ys
 
 {- - Variação 2: modifique a variação 1 para que o elemento pivô seja obtido a partir da análise
 dos 3 primeiros elementos da lista, sendo que o pivô será o elemento mediano entre eles.
@@ -50,17 +50,17 @@ execução; 2) o tempo de execução (apenas verifiquem se existe uma mudança a
 tempo de processamento). Apresentar esses resultados em um arquivo PDF, fazendo uma
 análise dos resultados encontrados. -}
 
-quicksort2 :: (Num a, Ord a) => [a] -> [a]
-quicksort2 [] = []
-quicksort2 x = lista1 ++ [pivo] ++ lista2
+quicksort2 :: Ord a => [a] -> ([a], Int)
+quicksort2 [] = ([], 0)
+quicksort2 x = (lista1 ++ [pivo] ++ lista2, cnt1+cnt2+cnt3)
     where
         mediana = take 3 x
         pivo
             | length mediana < 3 = head mediana
             | otherwise = mediano3 (head mediana) (mediana!!1) (mediana!!2)
-        (l1, l2) = divide pivo x
-        lista1 = quicksort1 l1
-        lista2 = quicksort1 l2
+        (l1, l2, cnt1) = divide pivo x
+        (lista1, cnt2) = quicksort2 l1
+        (lista2, cnt3) = quicksort2 l2
 
 mediano3 :: Ord a => a -> a -> a -> a
 mediano3 a b c

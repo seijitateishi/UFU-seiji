@@ -36,7 +36,7 @@ minimo (x:xs)
 
 
 {- - Variação1: Refaça o código original para que a busca pelo menor elemento (função mínimo) ea eliminação desse menor elemento da lista a ser ordenada (função remove) ocorra numamesma função (remove_menor), sem a necessidade de se percorrer a lista duas vezes a cadaiteração. -}
-
+-- FAZER
 
 {- Variação 2: Refaça a implementação do algoritmo Seleção usando funções genéricas (foldr oufoldr1) . -}
 selecaofoldr :: (Ord a) => [a] -> [a]

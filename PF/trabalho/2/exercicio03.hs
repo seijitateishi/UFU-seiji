@@ -14,37 +14,24 @@ x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
 {- Insertion original -} -- FALTA ARRUMAR O CONTADOR
-insercao :: [a] -> ([a], Int)
-insercao [] = ([], 0)
-insercao (x:xs) = insereOrd x aaa 0
-    where 
-        (resto, cnt) = insereOrd x aaa 0
-        (aaa, bbb) = insercao xs
 
-insereOrd :: (Num b, Ord a) => a -> [a] -> b -> ([a], b)
+insercao :: Ord a => [a] -> ([a], Int)
+insercao [] = ([], 0)
+insercao (x:xs) = (restoOrd, cnt+cntOrd)
+    where
+        (resto, cnt) = insercao xs
+        (restoOrd, cntOrd) = insereOrd x resto cnt
+
+insereOrd :: Ord a => a -> [a] -> Int -> ([a], Int)
 insereOrd x [] n = ([x], 0)
 insereOrd x (y:ys) n
-    | x <= y = (x:y:ys, n+1)
-    | otherwise = (y : resto, n)
-    where  
+    | x <= y = (x:y:ys, cnt+1)
+    | otherwise = (y : resto, cnt+1)
+    where
         (resto, cnt) = insereOrd x ys n
 
 {- Variação 1: Refaça a implementação do algoritmo Inserção usando funções genéricas(foldr ou foldr1) -}
-insercao1 :: Ord a => [a] -> [a]
-insercao1 = foldr insereOrd1 []
-
-insereOrd1 :: Ord t => t -> [t] -> [t]
-insereOrd1 x [] = [x]
-insereOrd1 x (y:ys)
-    | x <= y = (x:y:ys)
-    | otherwise = y : (insereOrd1 x ys)
-
-{-
-
-insereOrd1 :: Ord t => t -> [t] -> [t]
-insereOrd1 x [] = [x]
-insereOrd1 x (y:ys)
-    | x <= y = (x:y:ys)
-    | otherwise = y : (insereOrd1 x ys)
-
--}
+insercao1 :: [a] -> ([a], Int)
+insercao1 (x:xs) = (resto, cnt)
+    where
+        (resto, cnt) = foldr insereOrd x xs 0 -- DESCOBRIR COMO USAR O FOLDR CORRETAMENTE
