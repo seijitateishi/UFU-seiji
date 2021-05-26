@@ -14,44 +14,54 @@ x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
 {- Seleção original -}
-
-selecao :: Ord a => [a] -> [a]
-selecao [] = []
-selecao xs = [x] ++ selecao (remove x xs)
+selecao :: Ord a => [a] -> ([a], Int)
+selecao [] = ([], 0)
+selecao xs = ([x] ++ selecaoResto, cnt + cnt2 + cnt3)
     where
-        x = minimo xs
+        (x, cnt) = minimo xs
+        (y, cnt2) = remove x xs
+        (selecaoResto, cnt3) = selecao y
 
-remove :: Ord a => a->[a]->[a]
-remove a [] = []
+remove :: Ord a => a -> [a] -> ([a], Int)
+remove a [] = ([], 0)
 remove a (x:xs)
-    | a == x = xs
-    | otherwise = x:(remove a xs)
+    | a == x = (xs, cnt+1)
+    | otherwise = (x:rmvResto, cnt+1)
+    where
+        (rmvResto, cnt) = remove a xs
 
-minimo :: Ord a => [a] -> a
-minimo [] = undefined
-minimo [x] = x
+minimo :: Ord a => [a] -> (a, Int)
+minimo [] = (undefined, 0)
+minimo [x] = (x, 0)
 minimo (x:xs)
-    | x <= minimo xs = x
-    | otherwise = minimo xs
+    | x <= minimoResto = (x, cnt+1)
+    | otherwise = (minimoResto, cnt+1)
+    where
+        (minimoResto, cnt) = minimo xs
 
 
 {- - Variação1: Refaça o código original para que a busca pelo menor elemento (função mínimo) ea eliminação desse menor elemento da lista a ser ordenada (função remove) ocorra numamesma função (remove_menor), sem a necessidade de se percorrer a lista duas vezes a cadaiteração. -}
--- FAZER
+selecao1 :: Ord a => [a] -> ([a], Int)
+selecao1 [] = ([], 0)
+selecao1 xs = ([x] ++ selecaoResto, cnt + cnt2)
+    where
+        (resto, x, cnt) = removeMinimo xs
+        (selecaoResto, cnt2) = selecao1 resto
+
+removeMinimo :: Ord a => [a] -> ([a], a, Int)
+removeMinimo [] = ([], undefined, 0)
+removeMinimo [x] = ([], x, 0)
+removeMinimo (x:xs)
+    | x <= minimoResto = (minimoResto:removeResto , x, cnt+1)
+    | otherwise = (x:removeResto, minimoResto, cnt+1)
+    where
+        (removeResto, minimoResto, cnt) = removeMinimo xs
 
 {- Variação 2: Refaça a implementação do algoritmo Seleção usando funções genéricas (foldr oufoldr1) . -}
-selecaofoldr :: (Ord a) => [a] -> [a]
-selecaofoldr [] = []
-selecaofoldr xs = [x] ++ selecaofoldr (remove x xs)
-  where 
-    x = foldr1 min xs
-
-insercao :: (Ord a) => [a] -> [a]
-insercao [] = []
-insercao (x:xs) = insereOrd x (insercao xs)
-
-insereOrd :: (Ord a) => a -> [a] -> [a]
-insereOrd x [] = [x]
-insereOrd x (y:ys)
-  |x <= y = (x:y:ys)
-  |otherwise = y : (insereOrd x ys)    
-
+selecao2 :: Ord a => [a] -> ([a], Int)
+selecao2 [] = ([], 0)
+selecao2 xs = ([x] ++ selecaoResto, cnt + cnt2)
+    where
+        x = foldr1 min xs
+        (y, cnt) = remove x xs
+        (selecaoResto, cnt2) = selecao2 y

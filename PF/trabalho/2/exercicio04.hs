@@ -13,10 +13,13 @@ x5=[11,12,13,14,15,5,4,3,2,1,16,17,18,19,20,10,9,8,7,6]
 x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
-{- QuickSort original -} -- FALTA O CONTADOR DO QUICKSORT
-quicksort :: Ord a => [a] -> [a]
-quicksort [] = []
-quicksort (s:xs) = quicksort [x |x <- xs, x < s] ++ [s] ++ quicksort [x |x <- xs, x >= s]
+{- QuickSort original -}
+quicksort :: Ord a => [a] -> ([a], Int)
+quicksort [] = ([], 0)
+quicksort (s:xs) = (restoEsq ++ [s] ++ restoDir, (length restoEsq + length restoDir) + cnt + cnt1)
+    where
+        (restoEsq, cnt) = quicksort [x |x <- xs, x < s]
+        (restoDir, cnt1) = quicksort [x |x <- xs, x >= s]
 
 {- - Variação 1: modifique o algoritmo original para que ao invés dos elementos maiores e
 menores serem encontrados com buscas independentes, que seja elaborada e utilizada a

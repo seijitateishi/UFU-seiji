@@ -13,25 +13,23 @@ x5=[11,12,13,14,15,5,4,3,2,1,16,17,18,19,20,10,9,8,7,6]
 x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
-{- Insertion original -} -- FALTA ARRUMAR O CONTADOR
+{- Insertion original -}
 
 insercao :: Ord a => [a] -> ([a], Int)
 insercao [] = ([], 0)
-insercao (x:xs) = (restoOrd, cnt+cntOrd)
+insercao (x:xs) = (restoOrd, cnt + cntOrd)
     where
         (resto, cnt) = insercao xs
-        (restoOrd, cntOrd) = insereOrd x resto cnt
+        (restoOrd, cntOrd) = insereOrd x resto
 
-insereOrd :: Ord a => a -> [a] -> Int -> ([a], Int)
-insereOrd x [] n = ([x], 0)
-insereOrd x (y:ys) n
+insereOrd :: Ord a => a -> [a] -> ([a], Int)
+insereOrd x [] = ([x], 0)
+insereOrd x (y:ys)
     | x <= y = (x:y:ys, cnt+1)
     | otherwise = (y : resto, cnt+1)
     where
-        (resto, cnt) = insereOrd x ys n
+        (resto, cnt) = insereOrd x ys
 
 {- Variação 1: Refaça a implementação do algoritmo Inserção usando funções genéricas(foldr ou foldr1) -}
-insercao1 :: [a] -> ([a], Int)
-insercao1 (x:xs) = (resto, cnt)
-    where
-        (resto, cnt) = foldr insereOrd x xs 0 -- DESCOBRIR COMO USAR O FOLDR CORRETAMENTE
+insercao1 :: t a -> ([a], Int)
+insercao1 = foldr insereOrd ([], 0)
