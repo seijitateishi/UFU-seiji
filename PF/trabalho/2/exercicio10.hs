@@ -34,3 +34,7 @@ pertence y arv = if (pertenceAux y arv == 0) then False else True
         pertenceAux :: Int -> ArvBinInt -> Int
         pertenceAux y Nulo = 0
         pertenceAux y (No x left right) = pertenceAux y left + (if y == x then 1 else 0) + pertenceAux y right
+
+--pertence1 :: Int -> ArvBinInt -> Bool
+--pertence1 y (No x left right) = if y==x then True else pertence y left pertence y right
+--nao consegui pensar em um jeito do else conseguir usar a recursao para esquerda e para direita
