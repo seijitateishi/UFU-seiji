@@ -26,7 +26,7 @@ remove :: Ord a => a -> [a] -> ([a], Int)
 remove a [] = ([], 0)
 remove a (x:xs)
     | a == x = (xs, cnt+1)
-    | otherwise = (x:rmvResto, cnt+1)
+    | otherwise = (x:rmvResto, cnt)
     where
         (rmvResto, cnt) = remove a xs
 
@@ -35,7 +35,7 @@ minimo [] = (undefined, 0)
 minimo [x] = (x, 0)
 minimo (x:xs)
     | x <= minimoResto = (x, cnt+1)
-    | otherwise = (minimoResto, cnt+1)
+    | otherwise = (minimoResto, cnt)
     where
         (minimoResto, cnt) = minimo xs
 
@@ -53,7 +53,7 @@ removeMinimo [] = ([], undefined, 0)
 removeMinimo [x] = ([], x, 0)
 removeMinimo (x:xs)
     | x <= minimoResto = (minimoResto:removeResto , x, cnt+1)
-    | otherwise = (x:removeResto, minimoResto, cnt+1)
+    | otherwise = (x:removeResto, minimoResto, cnt)
     where
         (removeResto, minimoResto, cnt) = removeMinimo xs
 

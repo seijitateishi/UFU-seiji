@@ -31,5 +31,5 @@ insereOrd x (y:ys)
         (resto, cnt) = insereOrd x ys
 
 {- Variação 1: Refaça a implementação do algoritmo Inserção usando funções genéricas(foldr ou foldr1) -}
-insercao1 :: t a -> ([a], Int)
-insercao1 = foldr insereOrd ([], 0)
+--insercao1 :: t a -> ([a], Int)
+--insercao1 = foldr 

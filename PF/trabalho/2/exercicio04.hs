@@ -55,6 +55,7 @@ análise dos resultados encontrados. -}
 
 quicksort2 :: Ord a => [a] -> ([a], Int)
 quicksort2 [] = ([], 0)
+quicksort2 [x] = ([x], 0)
 quicksort2 x = (lista1 ++ [pivo] ++ lista2, cnt1+cnt2+cnt3)
     where
         mediana = take 3 x
@@ -62,8 +63,8 @@ quicksort2 x = (lista1 ++ [pivo] ++ lista2, cnt1+cnt2+cnt3)
             | length mediana < 3 = head mediana
             | otherwise = mediano3 (head mediana) (mediana!!1) (mediana!!2)
         (l1, l2, cnt1) = divide pivo x
-        (lista1, cnt2) = quicksort2 l1
-        (lista2, cnt3) = quicksort2 l2
+        (lista1, cnt2) = quicksort1 l1
+        (lista2, cnt3) = quicksort1 l2
 
 mediano3 :: Ord a => a -> a -> a -> a
 mediano3 a b c

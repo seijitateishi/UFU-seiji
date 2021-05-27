@@ -14,7 +14,6 @@ x6=[1,12,3,14,5,15,4,13,2,11,6,17,8,19,20,10,9,18,7,16]
 x7 = [20,8,2,11,13,3,7,18,14,4,16,10,15,1,9,17,19,12,5,6]
 
 {- Bolha original -}
-
 bolha :: (Num b, Ord a) => [a] -> ([a], b)
 bolha [] = ([], 0)
 bolha lista = bolhaOrd lista 0 (length lista)
