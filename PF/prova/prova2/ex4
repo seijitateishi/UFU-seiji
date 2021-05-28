@@ -1,0 +1,22 @@
+data Horario = AntesMD Int Int Int
+             | DepoisMD Int Int Int deriving Show
+
+maisTarde :: Horario -> Horario -> Horario
+maisTarde (DepoisMD x1 x2 x3) (AntesMD y1 y2 y3) = (DepoisMD x1 x2 x3)
+maisTarde (AntesMD y1 y2 y3) (DepoisMD x1 x2 x3) = (DepoisMD x1 x2 x3)
+maisTarde (AntesMD hora1 min1 seg1) (AntesMD hora2 min2 seg2)
+  |hora1 > hora2 = (AntesMD hora1 min1 seg1)
+  |hora2 > hora1 = (AntesMD hora2 min2 seg2)
+  |min1 > min2 = (AntesMD hora1 min1 seg1)
+  |min2 > min1 = (AntesMD hora2 min2 seg2)
+  |seg1 > seg2 = (AntesMD hora1 min1 seg1)
+  |seg2 > seg1 = (AntesMD hora2 min2 seg2)  
+  |otherwise = (AntesMD hora1 min1 seg1)
+maisTarde (DepoisMD hora1 min1 seg1) (DepoisMD hora2 min2 seg2)
+  |hora1 > hora2 = (DepoisMD hora1 min1 seg1)
+  |hora2 > hora1 = (DepoisMD hora2 min2 seg2)
+  |min1 > min2 = (DepoisMD hora1 min1 seg1)
+  |min2 > min1 = (DepoisMD hora2 min2 seg2)
+  |seg1 > seg2 = (DepoisMD hora1 min1 seg1)
+  |seg2 > seg1 = (DepoisMD hora2 min2 seg2)  
+  |otherwise = (DepoisMD hora1 min1 seg1)      

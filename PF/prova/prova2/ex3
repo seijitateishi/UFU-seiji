@@ -1,0 +1,13 @@
+data ArvoreBinInt = Nulo | No Int ArvoreBinInt ArvoreBinInt deriving Show
+
+
+buscaMult3 :: ArvoreBinInt -> String -> Int
+buscaMult3 (No x left right) "pre" = if (buscaPre (No x left right)) == 0 then -1 else (buscaPre (No x left right))
+buscaMult3 (No x left right) "sim" = if (buscaOrd (No x left right)) == 0 then -1 else (buscaOrd (No x left right))
+    where
+        buscaPre :: ArvoreBinInt -> Int
+        buscaPre Nulo = 0
+        buscaPre (No x left right) = if mod x 3 == 0 then x else 0 buscaPre left + buscaPre right
+        buscaOrd :: ArvoreBinInt -> Int
+        buscaOrd Nulo = 0
+        buscaOrd (No x left right) =  buscaOrd left + (if mod x 3 == 0 then x else 0) + buscaOrd right
