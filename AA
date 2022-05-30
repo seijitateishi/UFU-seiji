@@ -1,1 +1,119 @@
+#include <stdio.h>
+#include <stdlib.h>
 
+void insertionSort(int arr[], int n)
+{
+    int i, key, j;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+void my_mergesort(int *arr, int len) {
+  if (len == 1) { return; }
+  if (len == 2) {
+    if (arr[0] > arr[1]) {
+      int t = arr[1];
+      arr[1] = arr[0];
+      arr[0] = t;
+    }
+  }
+
+  int p = len/2;
+  int *arr1 = arr;
+  int *arr2 = arr+p;
+
+  my_mergesort(arr1, p);
+  my_mergesort(arr2, len-p);
+
+  int *t = malloc(sizeof(int)*len);
+  int *rt = t;
+  while (1) {
+    if (arr1 < arr+p && arr2 < arr+len) {
+      if (*arr1 <= *arr2) {
+        *t = *arr1;
+        arr1++;
+      } else {
+        *t = *arr2;
+        arr2++;
+      }
+    } else if(arr1 < arr+p) {
+      *t = *arr1;
+      arr1++;
+    } else if(arr2 < arr+len) {
+      *t = *arr2;
+      arr2++;
+    } else {
+      break;
+    }
+    t++;
+  }
+
+  memcpy(arr, rt, sizeof(int)*len);
+  free(rt);
+}
+
+//QuickSort
+void quicksort (int v[], int p, int r)
+{
+   if (p < r) {
+      int j = separa (v, p, r);
+      quicksort (v, p, j-1);
+      quicksort (v, j+1, r);
+   }
+}
+
+int separa (int v[], int p, int r) {
+   int c = v[r];
+   int t, j = p;
+   for (int k = p; k < r; ++k)
+      if (v[k] <= c) {
+         t = v[j], v[j] = v[k], v[k] = t;
+         ++j;
+      }
+   t = v[j], v[j] = v[r], v[r] = t;
+   return j;
+}
+
+int main()
+{
+    int vetor[5] = {6,4,9,3,1};
+    quicksort(vetor,0,4);
+    printf("quicksort");
+    for(int i = 0; i < 5; i++){
+        printf("%d",vetor[i]);
+    }
+    printf("\n");
+
+
+    vetor[0] = 6;
+    vetor[1] = 4;
+    vetor[2] = 9;
+    vetor[3] = 3;
+    vetor[4] = 1;
+    my_mergesort(vetor,5);
+    printf("mergesort");
+    for(int i = 0; i < 5; i++){
+        printf("%d",vetor[i]);
+    }
+
+    printf("\n");
+
+    vetor[0] = 6;
+    vetor[1] = 4;
+    vetor[2] = 9;
+    vetor[3] = 3;
+    vetor[4] = 1;
+    insertionSort(vetor,5);
+    printf("insertionsort");
+    for(int i = 0; i < 5; i++){
+        printf("%d",vetor[i]);
+    }
+    return 0;
+}
