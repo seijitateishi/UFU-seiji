@@ -1,0 +1,81 @@
+/*
+global selector * muda o comportamento
+de todos os elementos da página
+
+type selector h1,h2,p,div
+
+id selector #header, #box
+
+class selector .header, .box
+
+attribute selector [href]
+
+color : #ff0000;
+
+background-color : #ff0000;
+
+font-size : 20px;
+
+*/
+.m-40{
+    margin-top: 40px;
+}
+
+container{
+    width: 100%;
+    height: 100%;
+    background-color: #ff0000;
+}
+
+h1{
+    color: pink;
+    font-size: 40px;
+}
+
+embarque{
+    color: purple;
+    font-size: 20px;
+    padding: 60px;
+}
+/*style na tag>style no cabeçalho>style no css
+inline > tag style > tag link
+0 = universal selector, combinator and negation pseudo-class 
+1 = element type selector, pseudo-element
+10 = classes and attributes selector
+100 = id selector
+1000 = inline style
+!important = esquece todas as regras e faz o comando
+so e usado caso as cascatas nao funcionem
+@import = importa um arquivo css
+@media = media query
+@font-face = font face
+@keyframes = keyframes
+dimension = width, height, max-width, max-height, min-width, min-height, margin, padding, border, border-radius, font-size, font-weight, line-height, letter-spacing, text-align, text-indent, text-transform, white-space, word-spacing, word-wrap, z-index
+length = em, ex, px, cm, mm, in, pt, pc, %, vw, vh, vmin, vmax, auto
+angle = deg, rad, grad, turn
+time = s, ms, h, m, s, ms, frames, keyframes
+resolution = dpi, dpcm, dppx
+
+html{
+    font-size: 16px;
+}
+/*:root{
+    font-size: 16px;
+}
+div{
+    font-size: 18px;
+}
+/*p{
+    font-size: 2em;
+}
+p{
+    font-size: 2rem;
+}/*root*/
+/*vw = viewport width
+vh = viewport height*/
+.box{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    url(http://source.unsplash.com/random/);
+    }
