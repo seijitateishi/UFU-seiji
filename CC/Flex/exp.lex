@@ -7,34 +7,38 @@
 #include <string.h>
 %}
 
-ID [a-zA-Z_][a-zA-Z0-9_]*
+DIGITO [0-9]
+LETRA [a-zA-Z]
+ID [_a-z]({LETRA}|{DIGITO})*
 NUM_INT [0-9]+
 NUM_FLOAT [0-9]+\.[0-9]+
+COMENTARIO  "/*"([^*]|\*+[^/*])*\*+"/"
+ATRIBUICAO       ":="
+
 
 %%
 
-[[:space:]\n\t]+ { return token(TOK_SEP, NULL) }
+[[:space:]\n\t]+ { return token(TOK_SEP, NULL); }
 {ID} { return token(TOK_ID, yytext); }
 {NUM_INT} { return token(TOK_NUM_INT, yytext); }
 {NUM_FLOAT} { return token(TOK_NUM_FLOAT, yytext); }
 (==|!=|<=|>=|<|>) { return token(TOK_RELOP, yytext); }
-\/\*([^*]|\*+[^*/])*\*+\/ { return token(TOK_ASSIGN, NULL)}
-:= { return token(TOK_ASSIGN, NULL); }
+{COMENTARIO} { return token(TOK_COMMENT, NULL); }
+{ATRIBUICAO} { return token(TOK_ASSIGN, NULL); }
+. { return token(TOK_ERROR, 0); }
+<<EOF>> {return token(TOK_EOF, NULL); }
 begin { return token(TOK_BEGIN, NULL); }
 end { return token(TOK_END, NULL); }
 while { return token(TOK_WHILE, NULL); }
 repeat { return token(TOK_REPEAT, NULL); }
-until { return token(TOK_UNTIL, NULL, NULL); }
-. { return token(TOK_ERROR, 0); }
-<<EOF>> {return token(TOK_EOF, NULL)}
+until { return token(TOK_REPEAT, NULL); }
 
 %%
 
-// variável global para um token
 Token tok;
 
-Token* token(int tipo, char* lexema) {
+Token* token(int tipo, int valor) {
     tok.tipo = tipo;
-    tok.lexema = lexema;
+    tok.valor = valor;
     return &tok;
 }

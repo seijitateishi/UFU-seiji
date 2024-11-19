@@ -29,11 +29,11 @@
 // estrutura de um token
 typedef struct {
     int tipo;
-    char* lexema;
-} Token;
+    int valor;
+}Token;
 
 // função para criar um token
-extern Token* token(int tipo, char* lexema);
+extern Token* token();
 
 // função do analisador léxico
 extern Token* yylex();
