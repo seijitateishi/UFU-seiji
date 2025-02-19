@@ -1,0 +1,69 @@
+input[id="nome"]:invalid + span::after,
+input[id="email"]:invalid + span::after,
+input[id="cpf"]:invalid + span::after,
+input[id="cep"]:invalid + span::after{
+    content: "✖";
+    color: red;
+}
+
+input[id="nome"]:valid + span::after,
+input[id="email"]:valid + span::after,
+input[id="cpf"]:valid + span::after,
+input[id="cep"]:valid + span::after {
+    content: "✓";
+    color: green;
+}
+
+
+#nome {
+    font-weight: bold;
+    color: darkblue;
+}
+
+
+.tituloprincipal{
+    font-size: 24px;
+}
+
+
+h1 + p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+label ~ input {
+    margin-left: 10px;
+}
+
+
+a {
+    text-decoration: none;
+    color: blue;
+}
+a:hover {
+    color: darkred;
+}
+a:active {
+    color: purple;
+}
+
+
+h2:has p {
+    background-color: green;
+}
+
+
+:is(h1, h2, h3) {
+    font-family: Arial, sans-serif;
+    color: navy;
+}
+
+section:first-child {
+    border-top: 3px solid black;
+}
+
+
+label:first-of-type {
+    font-weight: bold;
+}
