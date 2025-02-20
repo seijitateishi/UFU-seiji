@@ -1,8 +1,44 @@
 body{
     background-color: #d6d4d4;
+    color: #616161;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    text-align: center;
+    font-size: 18px;
+}
+
+li{
+    display: inline;
+    margin: 0 1%;
+}
+
+a{
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
 }
 
 nav{
+    padding: 10px;
+    background-color: #616161;
     position: sticky;
+    text-align: center;
     top: 0;
+    width: 100%;
+}
+
+main{
+    box-sizing: border-box;
+    background-color: white;
+    border: #a3a3a3 1px solid;
+    width: 70%;
+    padding: 5%;
+    margin: auto;
+}
+footer{
+    text-align: center;
+    color: black;
 }
