@@ -46,9 +46,10 @@ main{
 
 img{
     overflow: hidden;
+    object-fit:fill;
+    display: block;
 }
 td{
-    box-sizing: border-box;
     padding: 0;
     overflow: hidden;
     border-radius: 15px;
