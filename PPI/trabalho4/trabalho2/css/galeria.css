@@ -1,0 +1,56 @@
+body{
+    background-color: #d6d4d4;
+    color: #616161;
+    width: 70%;
+    margin: auto;
+}
+
+li{
+    display: inline;
+    margin: 0 1%;
+}
+
+a{
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+
+header, nav, footer, main{
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+h2{
+    margin: 0;
+    color: #616161;
+}
+
+main{
+    padding: 30px;
+    text-align: left;
+    background-color: white;
+}
+
+#estrutura{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-spacing: 10px;
+}
+
+img{
+    overflow: hidden;
+}
+td{
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px #888888;
+}
