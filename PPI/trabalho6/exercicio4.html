@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Nós na Árvore DOM</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <pre id="output"></pre>
+  <h2>Tipos de nós na árvore DOM</h2>
+  <input type="text" id="myInput">
+  <!-- comentário -->
+  
+
+  <script>
+    const output = document.querySelector("#output");
+    for (let node of document.body.childNodes)
+      output.textContent += node.constructor.prototype + '\n';
+
+    const input = document.querySelector("#myInput");
+    output.textContent += (input instanceof HTMLInputElement) + '\n';
+    output.textContent += (input instanceof HTMLElement) + '\n';
+    output.textContent += (input instanceof Element) + '\n';
+    output.textContent += (input instanceof Node) + '\n';
+    output.textContent += (input instanceof EventTarget) + '\n';
+
+    output.textContent += document.constructor.prototype + '\n';
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<body>
+    <input type="text" name="altura" placeholder="Digite sua altura em centimetros">
+    <input type="radio" name="sexo" value="masculino">Masculino
+    <input type="radio" name="sexo" value="feminino">Feminino
+    <button type="button">Descobrir a o peso ideal</button>
+    <p></p>
+  
+    <script>
+    const botao = document.querySelector("button");
+    botao.onclick = function () {
+      const campoSexo = document.querySelector('input[name="sexo"]:checked');
+      const campoAltura = document.querySelector('input[name="altura"]');
+      let altura = parseInt(campoAltura.value);
+      if (campoSexo.value == "masculino") {
+        const pesoIdeal = 52 + (0.75 * (altura - 152.4));
+        const parSaida = document.querySelector("p");
+        parSaida.textContent = 'Seu peso ideal é: ' + pesoIdeal.toFixed(2) + ' kg';
+      } else {
+        const pesoIdeal = 52 + (0.67 * (altura - 152.4));
+        const parSaida = document.querySelector("p");
+        parSaida.textContent = 'Seu peso ideal é: ' + pesoIdeal.toFixed(2) + ' kg';
+      }
+      };
+    </script>
+  </body>
+  

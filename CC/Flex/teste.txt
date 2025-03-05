@@ -1,0 +1,14 @@
+begin
+    contador := 0
+    soma := 0.0
+    
+    while contador < 10
+        soma := soma + contador
+        contador := contador + 1
+    end
+    
+    repeat
+        soma := soma * 2.5
+        contador := contador - 1
+    until contador <= 0
+end

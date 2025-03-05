@@ -1,0 +1,15 @@
+<body>
+    <input type="text" name="nome">
+    <button type="button">Digite seu nome e clique aqui</button>
+    <p></p>
+  
+    <script>
+      const botao = document.querySelector("button");
+      botao.onclick = function () {
+        const campoNome = document.querySelector("input");
+        const parSaida = document.querySelector("p");
+        parSaida.textContent = 'Obrigado, ' + campoNome.value;
+      };
+    </script>
+  </body>
+  
