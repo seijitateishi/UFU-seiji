@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px;
+    padding: 10px;
+}
+.card{
+    height: 250px;
+    width: 150px;
+    margin: 10px ;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
+    overflow-wrap: break-word;
+}
