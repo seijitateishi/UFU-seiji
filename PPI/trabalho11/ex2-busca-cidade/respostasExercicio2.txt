@@ -1,0 +1,38 @@
+i.
+Status 200 OK
+ii.
+HTTP/1.1 200 OK
+Server: openresty
+Date: Thu, 10 Apr 2025 20:26:26 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Cache-Control: max-age=0
+Expires: Thu, 10 Apr 2025 20:26:26 GMT
+iii.
+Uberlândia
+iv.
+openresty
+v.
+Nao
+
+
+para 38400-500
+i.
+Status 404 Not Found
+ii.
+HTTP/1.1 404 Not Found
+Server: openresty
+Date: Thu, 10 Apr 2025 20:33:09 GMT
+Content-Type: text/html; charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+iii.
+38400-500 is not available
+iv.
+openresty
+v.
+Nao
+
+d)
+Retirando o ')' do primeiro if o status continua sendo 200 OK e o conteudo continua o mesmo tambem

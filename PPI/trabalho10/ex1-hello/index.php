@@ -4,14 +4,16 @@ require "../conexaoMysql.php";
 $pdo = mysqlConnect();
 
 try {
+  // String da query SQL
   $sql = <<<SQL
     SELECT nome, telefone
     FROM aluno
   SQL;
-
+  // Executa a query SQL
   $stmt = $pdo->query($sql);
 } 
 catch (Exception $e) {
+  // Se ocorrer um erro, exibe a mensagem de erro e encerra o script
   exit('Ocorreu uma falha: ' . $e->getMessage());
 }
 
@@ -38,11 +40,13 @@ catch (Exception $e) {
         <th>Telefone</th>
       </tr>
       <?php
+      // Loop para percorrer os resultados da consulta SQL
       while ($row = $stmt->fetch()) 
       {
+        // Filtra os dados para evitar XSS
         $nome = htmlspecialchars($row['nome']);
         $telefone = htmlspecialchars($row['telefone']);
-
+        // Exibe os dados em uma linha da tabela
         echo <<<HTML
         <tr>
           <td>$nome</td> 
