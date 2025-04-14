@@ -1,0 +1,4 @@
+c)
+content-type = application/json
+content-length = 63(o numero de caracteres do json do Ajax q foi enviado para o conteudo do site)
+payload foi o json que foi enviado em xhr.send(JSON.stringify(objetoJS));

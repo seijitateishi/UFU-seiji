@@ -35,4 +35,5 @@ v.
 Nao
 
 d)
-Retirando o ')' do primeiro if o status continua sendo 200 OK e o conteudo continua o mesmo tambem
+Retirando o ')' do primeiro if o erro 
+"<br /> <b>Parse error</b>: syntax error, unexpected token &quot;echo&quot; in <b>/home/vol14_1/infinityfree.com/if0_38295654/htdocs/trabalho11/ex2-busca-cidade/busca-cidade.php</b> on line <b>6</b><br />" apareceu apos o input do cep porem com status 200 OK

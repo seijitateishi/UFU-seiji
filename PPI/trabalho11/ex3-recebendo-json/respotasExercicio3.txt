@@ -1,0 +1,10 @@
+i.
+200 OK
+ii.
+application/json
+iii.
+{"rua":"Rua Tiradentes","bairro":"Fundinho","cidade":"Uberl\u00e2ndia"}
+iv.
+openresty
+v.
+Nao sei
