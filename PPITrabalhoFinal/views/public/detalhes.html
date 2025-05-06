@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Veículo - Veículo Já!</title>
+  <link rel="stylesheet" href="../../styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="../../images/logo.png" alt="Logotipo" />
+        <h1>Veículo Já!</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cadastro.html">Cadastro</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <main>
+    <section class="vehicle-details">
+      <h2>Detalhes do Veículo</h2>
+      <div class="vehicle-info">
+        <div class="vehicle-images">
+          <img src="images/uno1.jpg" alt="Imagem principal do veículo">
+          <div class="gallery">
+            <img src="images/uno2.jpg" alt="Imagem 2 do veículo">
+            <img src="images/uno3.jpg" alt="Imagem 3 do veículo">
+            <img src="images/uno.png" alt="Imagem 4 do veículo">
+          </div>
+        </div>
+        <div class="vehicle-data">
+          <h3>Fiat Uno 2015</h3>
+          <p><strong>Ano:</strong> 2015</p>
+          <p><strong>Cor:</strong> Vermelho</p>
+          <p><strong>Quilometragem:</strong> 80.000 km</p>
+          <p><strong>Descrição:</strong> Veículo compacto, econômico e perfeito para o uso urbano. Com manutenção em dia, oferece excelente desempenho e segurança.</p>
+          <p><strong>Valor:</strong> R$ 30.000</p>
+          <p><strong>Localização:</strong> São Paulo, SP</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="interest-registration">
+      <h2>Registre seu Interesse</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+        </div>
+        <div class="form-group">
+          <label for="telefone">Telefone:</label>
+          <input type="text" id="telefone" name="telefone" placeholder="Seu telefone" required>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Sua mensagem de interesse" rows="5" required></textarea>
+        </div>
+        <button type="submit">Enviar Interesse</button>
+      </form>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Portal Veículo Já! Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
