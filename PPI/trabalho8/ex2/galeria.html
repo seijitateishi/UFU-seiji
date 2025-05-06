@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/galeria.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clínica ABC Health - Atendimento médico de qualidade, com profissionais especializados e infraestrutura moderna.">
+    <title>Clínica ABC Health</title>
+    <style>
+        /* Estilo adicional para a sombra que será aplicada via JavaScript */
+        .sombra-vermelha {
+            box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.7) !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Clínica ABC Health</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Nossa Estrutura</h2>
+        <table id="estrutura">
+            <tbody>
+                <tr>
+                    <td><img src="images/fotohospital1.png" alt="Imagem de Estrutura 1" width="200" height="200"></td>
+                    <td><img src="images/fotohospital2.jpg" alt="Imagem de Estrutura 2" width="200" height="200"></td>
+                    <td><img src="images/fotohospital3.jpg" alt="Imagem de Estrutura 3" width="200" height="200"></td>
+                    <td><img src="images/fotohospital4.jpg" alt="Imagem de Estrutura 4" width="200" height="200"></td>
+                </tr>
+                <tr>
+                    <td><img src="images/fotohospital5.jpg" alt="Imagem de Estrutura 5" width="200" height="200"></td>
+                    <td><img src="images/fotohospital6.jpg" alt="Imagem de Estrutura 6" width="200" height="200"></td>
+                    <td><img src="images/fotohospital7.jpg" alt="Imagem de Estrutura 7" width="200" height="200"></td>
+                    <td><img src="images/fotohospital8.jpg" alt="Imagem de Estrutura 8" width="200" height="200"></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <p>Contato: (34) 3239-4411 | Endereço: Av. João Naves de Ávila, 2121 - Santa Mônica, Uberlândia - MG, 38408-100</p>
+    </footer>
+
+    <script>
+        // Função para adicionar eventos de mouse a todas as imagens
+        function inicializarEfeitosImagens() {
+            // Seleciona todas as imagens da página
+            const imagens = document.querySelectorAll('img');
+            
+            // Adiciona eventos para cada imagem encontrada
+            imagens.forEach(imagem => {
+                // Evento quando o mouse entra na imagem
+                imagem.addEventListener('mouseenter', function() {
+                    // Adiciona a classe que aplica a sombra vermelha
+                    this.classList.add('sombra-vermelha');
+                });
+                
+                // Evento quando o mouse sai da imagem
+                imagem.addEventListener('mouseleave', function() {
+                    // Remove a classe que aplica a sombra vermelha
+                    this.classList.remove('sombra-vermelha');
+                });
+            });
+        }
+        
+        // Executa a função quando a página for carregada
+        window.onload = inicializarEfeitosImagens;
+    </script>
+</body>
+</html>

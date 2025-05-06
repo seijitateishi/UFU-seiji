@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Interesses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+
+        ol {
+            padding-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 5px;
+            padding: 8px;
+            background-color: #cce5ff;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: transparent;
+            border: none;
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="interesse">Interesse:</label>
+            <input type="text" id="interesse" name="interesse">
+        </div>
+        <ol id="lista-interesses">
+            <!-- Itens serão adicionados aqui dinamicamente -->
+        </ol>
+    </div>
+
+    <script>
+        // Selecionando elementos do DOM
+        const inputInteresse = document.getElementById('interesse');
+        const listaInteresses = document.getElementById('lista-interesses');
+
+        // Função que adiciona um novo item à lista quando tecla Enter é pressionada
+        inputInteresse.addEventListener('keypress', function(event) {
+            // Verifica se a tecla pressionada foi Enter (código 13)
+            if (event.keyCode === 13) {
+                // Previne o comportamento padrão do formulário
+                event.preventDefault();
+                
+                // Obtém o texto digitado no campo e remove espaços em branco extras
+                const texto = inputInteresse.value.trim();
+                
+                // Verifica se o texto não está vazio
+                if (texto !== '') {
+                    // Cria um novo item de lista
+                    const novoItem = document.createElement('li');
+                    
+                    // Cria um span para o texto
+                    const spanTexto = document.createElement('span');
+                    spanTexto.textContent = texto;
+                    
+                    // Cria o botão de exclusão (X)
+                    const botaoExcluir = document.createElement('button');
+                    botaoExcluir.textContent = 'X';
+                    botaoExcluir.className = 'delete-btn';
+                    
+                    // Adiciona evento de clique para excluir o item quando o X for clicado
+                    botaoExcluir.addEventListener('click', function() {
+                        listaInteresses.removeChild(novoItem);
+                    });
+                    
+                    // Adiciona elementos ao item da lista
+                    novoItem.appendChild(spanTexto);
+                    novoItem.appendChild(botaoExcluir);
+                    
+                    // Adiciona o novo item à lista
+                    listaInteresses.appendChild(novoItem);
+                    
+                    // Limpa o campo de entrada
+                    inputInteresse.value = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

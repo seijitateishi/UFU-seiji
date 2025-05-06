@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Modal</title> 
+    <link rel="stylesheet" href="css/modal.css"> <!-- Link para o CSS do modal -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('bg2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Teste de Modal</h2>
+        <button id="openModal">Abrir Modal</button>
+    </div>
+
+    <!-- Estrutura do modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">X</span>
+            <p>Este é um modal de teste!</p>
+        </div>
+    </div>
+
+    <script src="js/modal.js"></script> <!-- Link para o JavaScript do modal -->
+    <script>
+        // Seleciona o botão que abre o modal
+        const openModalButton = document.getElementById('openModal');
+        // Seleciona o modal
+        const modal = document.getElementById('modal');
+        // Seleciona o elemento <span> que fecha o modal
+        const closeModalButton = document.querySelector('.close');
+
+        // Quando o usuário clica no botão, abre o modal
+        openModalButton.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Quando o usuário clica no <span> (x), fecha o modal
+        closeModalButton.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Quando o usuário clica fora do modal, fecha-o
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>

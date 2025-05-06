@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+main {
+    flex: 1;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+header {
+    background: #35424a;
+    color: #fff;
+    padding: 10px
+}
+
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logo img {
+    width: 100px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.search-panel form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    margin-bottom: 15px;
+}
+
+.select-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.select-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-panel button {
+    padding: 10px 20px;
+    background: #35424a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+footer {
+    background: #35424a;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 30px;
+}
+
+.search-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.search-button button {
+    width: 35%;
+}
+
+
+.vehicle-details {
+    background: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.vehicle-details h2 {
+    text-align: center;
+    color: #35424a;
+    margin-bottom: 25px;
+}
+
+.vehicle-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.vehicle-images {
+    flex: 1 1 300px;
+    max-width: 500px;
+}
+
+.vehicle-images>img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.gallery {
+    display: flex;
+    gap: 10px;
+}
+
+.gallery img {
+    width: calc(50% - 5px);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+.vehicle-data {
+    flex: 1 1 300px;
+    max-width: 500px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.vehicle-data h3 {
+    color: #35424a;
+    margin-bottom: 15px;
+}
+
+.vehicle-data p {
+    margin-bottom: 10px;
+}
+
+.vehicle-data strong {
+    color: #333;
+}
+
+.interest-registration {
+    background: #fff;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.interest-registration h2 {
+    text-align: center;
+    color: #35424a;
+    margin-bottom: 25px;
+}
+
+.interest-registration form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.interest-registration .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.interest-registration .form-group input,
+.interest-registration .form-group textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.interest-registration button {
+    padding: 12px;
+    background: #35424a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.interest-registration button:hover {
+    background: #2c3e50;
+}
+
+@media (max-width: 768px) {
+    .vehicle-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.form-section {
+    width: 420px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #35424a;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #35424a;
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #35424a;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+    background: #2c3e50;
+}
+
+.dashboard-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.dashboard-section h2 {
+    color: #35424a;
+    margin-bottom: 15px;
+}
+
+.dashboard-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-action {
+    text-decoration: none;
+    color: #fff;
+    background: #35424a;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-action:hover {
+    background: #2c3e50;
+}
+
+.logout {
+    background: #c0392b !important;
+}
+
+.listing-section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.listing-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #35424a;
+}
+
+.card-restrito {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 280px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-restrito:hover {
+    transform: scale(1.03);
+}
+
+.card-restrito img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content-restrito {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-content-restrito h3 {
+    margin-bottom: 10px;
+    color: #35424a;
+    font-size: 18px;
+}
+
+.card-content-restrito p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.card-buttons a {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff;
+    background: #35424a;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.card-buttons a:hover {
+    background: #2c3e50;
+}
+
+.delete-btn {
+    background: #c0392b !important;
+}
+
+.detail-section {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.detail-section h2 {
+    text-align: center;
+    color: #35424a;
+    margin-bottom: 20px;
+}
+
+.detail-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.detail-images {
+    flex: 1 1 300px;
+    max-width: 450px;
+}
+
+.detail-images img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.detail-data {
+    flex: 1 1 300px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-data h3 {
+    color: #35424a;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.detail-data p {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.interests-section {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.interests-section h2 {
+    text-align: center;
+    color: #35424a;
+    margin-bottom: 20px;
+}
+
+.interests-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.interests-table thead {
+    background: #f0f0f0;
+}
+
+.interests-table th,
+.interests-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 14px;
+}
+
+.interests-table th {
+    color: #333;
+    font-weight: bold;
+}
+
+.delete-interest {
+    color: #fff;
+    background: #c0392b;
+    padding: 6px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+.delete-interest:hover {
+    background: #a93226;
+}

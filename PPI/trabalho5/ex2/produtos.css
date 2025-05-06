@@ -1,0 +1,100 @@
+/* Estilos gerais */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Conteúdo principal */
+main {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Media query para telas pequenas */
+@media (max-width: 400px) {
+    main {
+        width: 100%;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+}
+
+/* Estilo dos cards */
+.card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: calc(33.333% - 20px);
+    min-width: 250px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Título do card */
+.card h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Imagem do card */
+.card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+/* Descrição do card */
+.card p {
+    flex-grow: 1;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Preço do card */
+.card .preco {
+    font-weight: bold;
+    color: #e63946;
+    text-align: right;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 900px) {
+    .card {
+        width: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 600px) {
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
+}

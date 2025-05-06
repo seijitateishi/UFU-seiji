@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testando API Restful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+        #resultados {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testando API Restful</h1>
+    
+    <div>
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep">
+        
+        <label for="rua">Rua:</label>
+        <input type="text" id="rua" name="rua">
+        
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro">
+        
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade">
+        
+        <button id="btnBuscar">Buscar endereço pelo CEP (GET)</button>
+        <button id="btnCriar">Criar novo (POST)</button>
+        <button id="btnApagar">Apagar pelo CEP (DELETE)</button>
+        <button id="btnListar">Listar todos os endereços</button>
+    </div>
+    
+    <div id="resultados"></div>
+    
+    <script>
+        // Referências aos elementos do DOM
+        const cepInput = document.getElementById('cep');
+        const ruaInput = document.getElementById('rua');
+        const bairroInput = document.getElementById('bairro');
+        const cidadeInput = document.getElementById('cidade');
+        const resultadosDiv = document.getElementById('resultados');
+        
+        // Botão para buscar endereço pelo CEP
+        document.getElementById('btnBuscar').addEventListener('click', async () => {
+            const cep = cepInput.value.trim();
+            if (!cep) {
+                alert('Por favor, digite um CEP.');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/address/${cep}`);
+                
+                if (response.ok) {
+                    const endereco = await response.json();
+                    ruaInput.value = endereco.rua;
+                    bairroInput.value = endereco.bairro;
+                    cidadeInput.value = endereco.cidade;
+                } else {
+                    alert(`Endereço não encontrado para o CEP: ${cep}`);
+                    ruaInput.value = '';
+                    bairroInput.value = '';
+                    cidadeInput.value = '';
+                }
+            } catch (error) {
+                console.error('Erro ao buscar endereço:', error);
+                alert('Ocorreu um erro ao buscar o endereço.');
+            }
+        });
+        
+        // Botão para criar novo endereço
+        document.getElementById('btnCriar').addEventListener('click', async () => {
+            const endereco = {
+                cep: cepInput.value.trim(),
+                rua: ruaInput.value.trim(),
+                bairro: bairroInput.value.trim(),
+                cidade: cidadeInput.value.trim()
+            };
+            
+            if (!endereco.cep || !endereco.rua || !endereco.bairro || !endereco.cidade) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/address', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(endereco)
+                });
+                
+                if (response.ok) {
+                    alert('Endereço adicionado com sucesso!');
+                    // Limpar os campos após adicionar
+                    cepInput.value = '';
+                    ruaInput.value = '';
+                    bairroInput.value = '';
+                    cidadeInput.value = '';
+                } else {
+                    alert('Erro ao adicionar endereço.');
+                }
+            } catch (error) {
+                console.error('Erro ao adicionar endereço:', error);
+                alert('Ocorreu um erro ao adicionar o endereço.');
+            }
+        });
+        
+        // Botão para apagar endereço pelo CEP
+        document.getElementById('btnApagar').addEventListener('click', async () => {
+            const cep = cepInput.value.trim();
+            if (!cep) {
+                alert('Por favor, digite um CEP.');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/address/${cep}`, {
+                    method: 'DELETE'
+                });
+                
+                if (response.ok) {
+                    alert(`Endereço com CEP ${cep} removido com sucesso!`);
+                    // Limpar os campos após remover
+                    cepInput.value = '';
+                    ruaInput.value = '';
+                    bairroInput.value = '';
+                    cidadeInput.value = '';
+                } else {
+                    alert(`Endereço não encontrado para o CEP: ${cep}`);
+                }
+            } catch (error) {
+                console.error('Erro ao apagar endereço:', error);
+                alert('Ocorreu um erro ao apagar o endereço.');
+            }
+        });
+        
+        // Botão para listar todos os endereços
+        document.getElementById('btnListar').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/address');
+                
+                if (response.ok) {
+                    const enderecos = await response.json();
+                    
+                    // Limpar resultados anteriores
+                    resultadosDiv.innerHTML = '<h2>Endereços Cadastrados:</h2>';
+                    
+                    if (enderecos.length === 0) {
+                        resultadosDiv.innerHTML += '<p>Nenhum endereço cadastrado.</p>';
+                    } else {
+                        const lista = document.createElement('ul');
+                        
+                        enderecos.forEach(endereco => {
+                            const item = document.createElement('li');
+                            item.textContent = `CEP: ${endereco.cep}, Rua: ${endereco.rua}, Bairro: ${endereco.bairro}, Cidade: ${endereco.cidade}`;
+                            lista.appendChild(item);
+                        });
+                        
+                        resultadosDiv.appendChild(lista);
+                    }
+                } else {
+                    alert('Erro ao listar endereços.');
+                }
+            } catch (error) {
+                console.error('Erro ao listar endereços:', error);
+                alert('Ocorreu um erro ao listar os endereços.');
+            }
+        });
+    </script>
+</body>
+</html>
