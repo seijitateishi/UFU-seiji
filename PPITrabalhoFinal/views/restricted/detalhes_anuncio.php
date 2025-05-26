@@ -13,7 +13,7 @@
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -21,7 +21,7 @@
           <li><a href="principal_interna.php">Início</a></li>
           <li><a href="criar_anuncio.php">Criar Anúncio</a></li>
           <li><a href="listar_anuncios.php">Meus Anúncios</a></li>
-          <li><a href="index.html">Sair</a></li>
+          <li><a href="../../index.html">Sair</a></li>
         </ul>
       </nav>
     </div>

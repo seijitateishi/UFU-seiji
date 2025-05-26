@@ -1,4 +1,7 @@
-<?php require_once "../../verificaLogin.php"; 
+<?php 
+require_once "../../verificaLogin.php"; 
+// Obtém os dados do usuário logado
+$usuario = getUsuarioLogado();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +16,7 @@
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -21,7 +24,7 @@
           <li><a href="principal_interna.php" class="active">Início</a></li>
           <li><a href="criar_anuncio.php">Criar Anúncio</a></li>
           <li><a href="listar_anuncios.php">Meus Anúncios</a></li>
-          <li><a href="index.html">Sair</a></li> 
+          <li><a href="../../index.html">Sair</a></li> 
         </ul>
       </nav>
     </div>
@@ -29,12 +32,14 @@
 
   <main>
     <section class="dashboard-section">
-      <h2>Bem-vindo(a)</h2>
+      <h2>Bem-vindo(a), <?php echo htmlspecialchars($usuario->nome); ?>!</h2>
+      <p>Email: <?php echo htmlspecialchars($usuario->email); ?></p>
+      <p>Sua sessão expira em 30 minutos de inatividade.</p>
 
       <div class="dashboard-actions">
         <a class="btn-action" href="criar_anuncio.php">Criar Novo Anúncio</a>
         <a class="btn-action" href="listar_anuncios.php">Listar Meus Anúncios</a>
-        <a class="btn-action logout" href="index.php">Sair</a>
+        <a class="btn-action logout" href="../../index.html">Sair</a>
       </div>
     </section>
   </main>

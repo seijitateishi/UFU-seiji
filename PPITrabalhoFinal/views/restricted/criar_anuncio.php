@@ -13,7 +13,7 @@
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -21,7 +21,7 @@
           <li><a href="../restricted/principal_interna.php">Início</a></li>
           <li><a href="../restricted/criar_anuncio.php" class="active">Criar Anúncio</a></li>
           <li><a href="../restricted/listar_anuncios.php">Meus Anúncios</a></li>
-          <li><a href="../publics/index.html">Sair</a></li>
+          <li><a href="../../index.html">Sair</a></li>
         </ul>
       </nav>
     </div>
@@ -30,7 +30,7 @@
   <main>
     <section class="form-section">
       <h2>Criar Novo Anúncio</h2>
-      <form id="criar-anuncio-form">
+      <form id="criar-anuncio-form" enctype="multipart/form-data">
         <div class="select-group">
             <label for="marca">Marca:</label>
             <select id="marca" name="marca">
@@ -92,10 +92,11 @@
 
         <div class="form-group">
           <label for="fotos">Fotos do veículo:</label>
-          <input type="file" id="fotos" name="fotos" required accept=".png"/>
+          <input type="file" id="fotos" name="fotos" required accept="image/*"/>
+          <small>Escolha uma imagem do seu veículo (JPG, PNG, etc.)</small>
         </div>
 
-        <button type="submit" >Publicar Anúncio</button>
+        <button type="submit">Publicar Anúncio</button>
       </form>
     </section>
   </main>
@@ -120,19 +121,29 @@
       formData.append("estado", document.querySelector("#estado").value);
       formData.append("cidade", document.querySelector("#cidade").value);
 
-      formData.append("fotos", document.querySelector("#fotos").files[0]);
+      // Get the file input
+      const fileInput = document.querySelector("#fotos");
+      if (fileInput.files.length > 0) {
+        formData.append("fotos", fileInput.files[0]);
+      }
 
+      try {
+        const resposta = await fetch("../../controladorRestrito.php?acao=criarAnuncio", {
+          method: "POST",
+          body: formData
+        });
 
-      const resposta = await fetch("../../controladorRestrito.php?acao=criarAnuncio", {
-        method: "POST",
-        body: formData
-      });
-
-      if(resposta.ok) {
-        alert("Anúncio criado com sucesso!");
-        window.location.href = "listar_anuncios.php";
-      } else {
-        console.error("Erro ao criar anúncio:");
+        const dados = await resposta.json();
+        
+        if (dados.sucesso) {
+          alert("Anúncio criado com sucesso!");
+          window.location.href = "listar_anuncios.php";
+        } else {
+          alert(dados.mensagem || "Erro ao criar anúncio");
+        }
+      } catch (error) {
+        console.error("Erro ao criar anúncio:", error);
+        alert("Erro ao criar anúncio. Por favor, tente novamente mais tarde.");
       }
     });
   </script>

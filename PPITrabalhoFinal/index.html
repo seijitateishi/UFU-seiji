@@ -12,7 +12,7 @@
     <header>
         <div class="header-content">
             <div class="logo">
-                <img src="../../images/logo.png" alt="Logotipo" />
+                <img src="uploads/logo.jpeg" alt="Logotipo" />
                 <h1>Veículo Já!</h1>
             </div>
             <nav>
@@ -27,42 +27,37 @@
 
     <main>
         <section class="search-panel">
-            <form>
+            <form id="search-form">
                 <div class="select-group">
                     <label for="marca">Marca:</label>
                     <select id="marca" name="marca">
-                        <option value="">Selecione</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="chevrolet">Chevrolet</option>
-                        <option value="ford">Ford</option>
+                        <option value="">Todas as marcas</option>
+                        <!-- Marcas serão carregadas via AJAX -->
                     </select>
                 </div>
                 <div class="select-group">
                     <label for="modelo">Modelo:</label>
-                    <select id="modelo" name="modelo">
-                        <option value="">Selecione</option>
-                        <option value="uno">Uno</option>
-                        <option value="corsa">Corsa</option>
-                        <option value="focus">Focus</option>
+                    <select id="modelo" name="modelo" disabled>
+                        <option value="">Todos os modelos</option>
+                        <!-- Modelos serão carregados via AJAX -->
                     </select>
                 </div>
                 <div class="select-group">
                     <label for="cidade">Cidade:</label>
-                    <select id="cidade" name="cidade">
-                        <option value="">Selecione</option>
-                        <option value="sao_paulo">São Paulo</option>
-                        <option value="rio_de_janeiro">Rio de Janeiro</option>
-                        <option value="belo_horizonte">Belo Horizonte</option>
+                    <select id="cidade" name="cidade" disabled>
+                        <option value="">Todas as cidades</option>
+                        <!-- Cidades serão carregadas via AJAX -->
                     </select>
                 </div>
                 <div class="search-button">
-                    <button>Buscar</button>
+                    <button type="submit">Buscar</button>
                 </div>
-
             </form>
         </section>
 
         <section class="cards-container" id="cards-container">
+            <!-- Cards serão carregados via AJAX -->
+            <p id="loading-message">Carregando anúncios...</p>
         </section>
         
         <template id="card-template">
@@ -75,7 +70,8 @@
                     <p class="valor"></p>
                 </div>
                 <div class="card-buttons">
-                    <a href="views/public/registrar_interesse.html">Manifestar interesse</a>
+                    <a class="interesse-link" href="views/public/registrar_interesse.html">Manifestar interesse</a>
+                    <a class="detalhes-link" href="views/public/exibir_anuncio.php">Ver detalhes</a>
                 </div>
             </article>
         </template>
@@ -86,17 +82,152 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", async function () {
+        document.addEventListener("DOMContentLoaded", function () {
             const container = document.getElementById("cards-container");
             const template = document.getElementById("card-template");
-    
-            try {
-                const resposta = await fetch("controladorPublico.php?acao=listarAnuncios")
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar anúncios: " + resposta.status);
+            const searchForm = document.getElementById("search-form");
+            const loadingMessage = document.getElementById("loading-message");
+            
+            const marcaSelect = document.getElementById("marca");
+            const modeloSelect = document.getElementById("modelo");
+            const cidadeSelect = document.getElementById("cidade");
+            
+            // Load brands when page loads
+            loadMarcas();
+            
+            // Load initial ads
+            loadAnuncios();
+            
+            // Event listeners for select fields
+            marcaSelect.addEventListener("change", function() {
+                // Reset related fields
+                modeloSelect.innerHTML = '<option value="">Todos os modelos</option>';
+                cidadeSelect.innerHTML = '<option value="">Todas as cidades</option>';
+                
+                if (this.value) {
+                    modeloSelect.disabled = false;
+                    loadModelos(this.value);
+                } else {
+                    modeloSelect.disabled = true;
+                    cidadeSelect.disabled = true;
                 }
-    
-                const anuncios = await resposta.json();
+            });
+            
+            modeloSelect.addEventListener("change", function() {
+                // Reset cidade field
+                cidadeSelect.innerHTML = '<option value="">Todas as cidades</option>';
+                
+                if (this.value) {
+                    cidadeSelect.disabled = false;
+                    loadCidades(marcaSelect.value, this.value);
+                } else {
+                    cidadeSelect.disabled = true;
+                }
+            });
+            
+            // Handle search form submission
+            searchForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+                loadAnuncios({
+                    marca: marcaSelect.value,
+                    modelo: modeloSelect.value,
+                    cidade: cidadeSelect.value
+                });
+            });
+            
+            // Function to load brands
+            async function loadMarcas() {
+                try {
+                    const response = await fetch("controladorPublico.php?acao=listarMarcas");
+                    if (!response.ok) {
+                        throw new Error("Erro ao carregar marcas: " + response.status);
+                    }
+                    
+                    const marcas = await response.json();
+                    
+                    marcas.forEach(marca => {
+                        const option = document.createElement("option");
+                        option.value = marca;
+                        option.textContent = marca;
+                        marcaSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Erro ao carregar marcas:", error);
+                }
+            }
+            
+            // Function to load models based on selected brand
+            async function loadModelos(marca) {
+                try {
+                    const response = await fetch(`controladorPublico.php?acao=listarModelos&marca=${encodeURIComponent(marca)}`);
+                    if (!response.ok) {
+                        throw new Error("Erro ao carregar modelos: " + response.status);
+                    }
+                    
+                    const modelos = await response.json();
+                    
+                    modelos.forEach(modelo => {
+                        const option = document.createElement("option");
+                        option.value = modelo;
+                        option.textContent = modelo;
+                        modeloSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Erro ao carregar modelos:", error);
+                }
+            }
+            
+            // Function to load cities based on selected brand and model
+            async function loadCidades(marca, modelo) {
+                try {
+                    const response = await fetch(
+                        `controladorPublico.php?acao=listarCidades&marca=${encodeURIComponent(marca)}&modelo=${encodeURIComponent(modelo)}`
+                    );
+                    if (!response.ok) {
+                        throw new Error("Erro ao carregar cidades: " + response.status);
+                    }
+                    
+                    const cidades = await response.json();
+                    
+                    cidades.forEach(cidade => {
+                        const option = document.createElement("option");
+                        option.value = cidade;
+                        option.textContent = cidade;
+                        cidadeSelect.appendChild(option);
+                    });
+                } catch (error) {
+                    console.error("Erro ao carregar cidades:", error);
+                }
+            }
+            
+            // Function to load ads with optional filters
+            async function loadAnuncios(filters = {}) {
+                // Show loading message
+                container.innerHTML = '<p id="loading-message">Carregando anúncios...</p>';
+                
+                try {
+                    // Build query string with filters
+                    let queryParams = "acao=listarAnuncios";
+                    for (const [key, value] of Object.entries(filters)) {
+                        if (value) {
+                            queryParams += `&${key}=${encodeURIComponent(value)}`;
+                        }
+                    }
+                    
+                    const response = await fetch(`controladorPublico.php?${queryParams}`);
+                    if (!response.ok) {
+                        throw new Error("Erro ao buscar anúncios: " + response.status);
+                    }
+                    
+                    const anuncios = await response.json();
+                    
+                    // Clear container
+                    container.innerHTML = '';
+                    
+                    if (anuncios.length === 0) {
+                        container.innerHTML = '<p class="no-results">Nenhum anúncio encontrado com os filtros selecionados.</p>';
+                        return;
+                    }
     
                 anuncios.forEach(anuncio => {
                     const clone = template.content.cloneNode(true);
@@ -105,19 +236,36 @@
                     const ano = clone.querySelector(".ano");
                     const cidade = clone.querySelector(".cidade");
                     const valor = clone.querySelector(".valor");
-    
-                    img.src = anuncio.urlImagem || "images/placeholder.png";
-                    img.alt = `${anuncio.modelo} ${anuncio.ano}`;
-                    titulo.textContent = anuncio.modelo;
+                        const interesseLink = clone.querySelector(".interesse-link");
+                        const detalhesLink = clone.querySelector(".detalhes-link");
+                        
+                        // Set the first image from fotos array or use placeholder
+                        img.src = anuncio.fotos && anuncio.fotos.length > 0 
+                                ? anuncio.fotos[0] 
+                                : "images/placeholder.png";
+                        img.alt = `${anuncio.marca} ${anuncio.modelo}`;
+                        
+                        titulo.textContent = `${anuncio.marca} ${anuncio.modelo}`;
                     ano.textContent = `Ano: ${anuncio.ano}`;
                     cidade.textContent = `Cidade: ${anuncio.cidade}`;
-                    valor.textContent = `Valor: R$ ${(anuncio.valor)}`;
+                        
+                        // Format value as currency
+                        const valorFormatado = parseFloat(anuncio.valor).toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                        valor.textContent = `Valor: ${valorFormatado}`;
+                        
+                        // Set links with the anuncio ID
+                        interesseLink.href = `views/public/registrar_interesse.html?idAnuncio=${anuncio.id}`;
+                        detalhesLink.href = `views/public/exibir_anuncio.php?id=${anuncio.id}`;
     
                     container.appendChild(clone);
                 });
-    
-            } catch (erro) {
-                
+                } catch (error) {
+                    console.error("Erro ao carregar anúncios:", error);
+                    container.innerHTML = '<p class="error">Erro ao carregar anúncios. Por favor, tente novamente mais tarde.</p>';
+                }
             }
         });
     </script>

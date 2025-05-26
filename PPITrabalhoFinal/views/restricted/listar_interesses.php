@@ -13,7 +13,7 @@
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -21,7 +21,7 @@
           <li><a href="../restricted/principal_interna.php">Início</a></li>
           <li><a href="../restricted/criar_anuncio.php">Criar Anúncio</a></li>
           <li><a href="../restricted/listar_anuncios.php">Meus Anúncios</a></li>
-          <li><a href="index.html">Sair</a></li>
+          <li><a href="../../index.html">Sair</a></li>
         </ul>
       </nav>
     </div>
@@ -41,18 +41,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>João da Silva</td>
-            <td>(11) 99999-9999</td>
-            <td>Estou muito interessado, podemos negociar?</td>
-            <td><a href="#" class="delete-interest">Excluir</a></td>
-          </tr>
-          <tr>
-            <td>Maria Oliveira</td>
-            <td>(21) 98888-8888</td>
-            <td>Gostaria de saber mais sobre o estado do motor.</td>
-            <td><a href="#" class="delete-interest">Excluir</a></td>
-          </tr>
         </tbody>
       </table>
     </section>

@@ -14,7 +14,7 @@
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -22,7 +22,7 @@
           <li><a href="principal_interna.php">Início</a></li>
           <li><a href="criar_anuncio.php">Criar Anúncio</a></li>
           <li><a href="listar_anuncios.php" class="active">Meus Anúncios</a></li>
-          <li><a href="index.html">Sair</a></li>
+          <li><a href="../../index.html">Sair</a></li>
         </ul>
       </nav>
     </div>
@@ -53,20 +53,37 @@
         if (!resposta.ok) {
           throw new Error("Erro ao buscar anúncios: " + resposta.status);
         }
-
-        const anuncios = await resposta.json();
-        console.log("Anúncios do usuário:", anuncios);
+        
+        const dados = await resposta.json();
+        console.log("Resposta do servidor:", dados);
+        
+        if (!dados.sucesso) {
+          container.innerHTML = `<p class="empty-message">${dados.mensagem || "Nenhum anúncio encontrado."}</p>`;
+          return;
+        }
+        
+        const anuncios = dados.anuncios;
+        
+        if (!anuncios || anuncios.length === 0) {
+          container.innerHTML = `<p class="empty-message">Você ainda não possui anúncios cadastrados.</p>`;
+          return;
+        }
 
         anuncios.forEach(anuncio => {
           const card = document.createElement("div");
           card.classList.add("card-restrito");
 
+          let imageUrl = '../../images/placeholder.png';
+          if (anuncio.fotos && anuncio.fotos.length > 0) {
+            imageUrl = anuncio.fotos[0];
+          }
+
           card.innerHTML = `
-            <img src="${anuncio.urlImagem || 'images/placeholder.png'}" alt="Imagem do veículo" />
+            <img src="${imageUrl}" alt="${anuncio.marca} ${anuncio.modelo}" onerror="this.src='../../images/placeholder.png'" />
             <div class="card-content-restrito">
-              <h3>${anuncio.modelo}</h3>
+              <h3>${anuncio.marca} ${anuncio.modelo}</h3>
               <p>Ano: ${anuncio.ano}</p>
-              <p>Valor: R$ ${anuncio.valor}</p>
+              <p>Valor: R$ ${parseFloat(anuncio.valor).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
               <div class="card-buttons">
                 <a href="detalhes_anuncio.php?id=${anuncio.id}">Ver Detalhes</a>
                 <a href="listar_interesses.php?id=${anuncio.id}">Ver Interesses</a>
@@ -79,6 +96,7 @@
         });
       } catch (erro) {
         console.error("Erro ao carregar anúncios:", erro);
+        container.innerHTML = `<p class="error-message">Erro ao carregar anúncios. Por favor, tente novamente mais tarde.</p>`;
       }
     });
 

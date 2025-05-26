@@ -9,11 +9,10 @@
 </head>
 
 <body>
-
   <header>
     <div class="header-content">
       <div class="logo">
-        <img src="../../images/logo.png" alt="Logotipo" />
+        <img src="../../uploads/logo.jpeg" alt="Logotipo" />
         <h1>Veículo Já!</h1>
       </div>
       <nav>
@@ -59,13 +58,18 @@
         const resposta = await fetch("../../controladorPublico.php?acao=login", {
           method: "POST",
           body: formData,
-          credentials: "include"
+          credentials: "include",
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
         });
 
-        if (resposta.ok) {
+        const dados = await resposta.json();
+        
+        if (dados.sucesso) {
           window.location.href = "../restricted/principal_interna.php"; // Redireciona para a página interna
         } else {
-          alert(erro.mensagem || "Erro ao realizar login!");
+          alert(dados.mensagem || "Erro ao realizar login!");
         }
       } catch (error) {
         alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");

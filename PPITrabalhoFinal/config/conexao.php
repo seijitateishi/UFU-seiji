@@ -1,10 +1,10 @@
 <?php
 function mysqlConnect()
 {
-    $host = "sql309.infinityfree.com"; 
-    $username = "if0_38910828"; 
-    $password = "2ObGKxgi6rd"; 
-    $dbname = "if0_38910828_veiculoja"; 
+    $host = "sql107.infinityfree.com"; 
+    $username = "if0_38895186"; 
+    $password = "ABexcpp15GxvB"; 
+    $dbname = "if0_38895186_veiculojadb"; 
     $options = [
         PDO::ATTR_EMULATE_PREPARES => false, 
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, 

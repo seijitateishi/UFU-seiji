@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Modal</title> 
+    <link rel="stylesheet" href="css/modal.css"> <!-- Link para o CSS do modal -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('bg2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            width: 600px;
+            margin: 40px auto 0 auto;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: left;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 30px 30px 20px 30px;
+            border: 1px solid #888;
+            width: 400px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            font-size: 1.6em;
+            font-weight: bold;
+        }
+        .modal-content button {
+            margin-top: 20px;
+            width: 80%;
+            background: #e3f0ff;
+            color: #222;
+            border: 1px solid #b3d1f7;
+            border-radius: 4px;
+            font-size: 1em;
+            font-weight: normal;
+            transition: background 0.2s;
+        }
+        .modal-content button:hover {
+            background: #cce2ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Teste de Modal</h2>
+        <button id="openModal">Abrir Modal</button>
+    </div>
+
+    <!-- Estrutura do modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Olá! Seja bem vindo!</h3>
+            <button id="okModal">Ok</button>
+        </div>
+    </div>
+
+    <script src="js/modal.js"></script> <!-- Link para o JavaScript do modal -->
+    <script>
+        // Seleciona o botão que abre o modal
+        const openModalButton = document.getElementById('openModal');
+        // Seleciona o modal
+        const modal = document.getElementById('modal');
+        // Seleciona o botão Ok do modal
+        const okModalButton = document.getElementById('okModal');
+
+        // Quando o usuário clica no botão, abre o modal
+        openModalButton.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // Quando o usuário clica no botão Ok, fecha o modal
+        okModalButton.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Quando o usuário clica fora do modal, fecha-o
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>

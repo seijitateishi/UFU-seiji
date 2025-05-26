@@ -61,7 +61,24 @@ switch ($acao) {
   case "listarAnuncios":
     //--------------------------------------------------------------------------------------
     try {
-      $arrayClientes = Anuncio::GetFirst20($pdo);
+      // Collect filter parameters
+      $filters = [];
+      
+      if (!empty($_GET['marca'])) {
+        $filters['marca'] = $_GET['marca'];
+      }
+      
+      if (!empty($_GET['modelo'])) {
+        $filters['modelo'] = $_GET['modelo'];
+      }
+      
+      if (!empty($_GET['cidade'])) {
+        $filters['cidade'] = $_GET['cidade'];
+      }
+      
+      // Use the new GetWithFilters method
+      $arrayClientes = Anuncio::GetWithFilters($pdo, $filters);
+      
       header('Content-Type: application/json; charset=utf-8');
       echo json_encode($arrayClientes);
     } catch (Exception $e) {
@@ -69,8 +86,44 @@ switch ($acao) {
     }
     break;
 
+  case "listarMarcas":
+    //--------------------------------------------------------------------------------------
+    try {
+      $marcas = Anuncio::GetUniqueBrands($pdo);
+      header('Content-Type: application/json; charset=utf-8');
+      echo json_encode($marcas);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage());
+    }
+    break;
+    
+  case "listarModelos":
+    //--------------------------------------------------------------------------------------
+    $marca = $_GET['marca'] ?? '';
+    try {
+      $modelos = Anuncio::GetModelosByMarca($pdo, $marca);
+      header('Content-Type: application/json; charset=utf-8');
+      echo json_encode($modelos);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage());
+    }
+    break;
+    
+  case "listarCidades":
+    //--------------------------------------------------------------------------------------
+    $marca = $_GET['marca'] ?? '';
+    $modelo = $_GET['modelo'] ?? '';
+    try {
+      $cidades = Anuncio::GetCidadesByMarcaModelo($pdo, $marca, $modelo);
+      header('Content-Type: application/json; charset=utf-8');
+      echo json_encode($cidades);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage());
+    }
+    break;
+
     case "login":
-      session_start();
+      require_once "utils/sessao.php";
   
       $email = $_POST["email"] ?? "";
       $senha = $_POST["senha"] ?? "";
@@ -79,12 +132,22 @@ switch ($acao) {
           $usuario = Anunciante::buscarPorEmail($pdo, $email);
   
           if ($usuario && password_verify($senha, $usuario->senhaHash)) {
-              $_SESSION["usuario_id"] = $usuario->id;
-              $_SESSION["usuario_nome"] = $usuario->nome;
-              $_SESSION["usuario_email"] = $usuario->email;
+              // Usa a nova função de login para gerenciar a sessão
+              fazerLogin($usuario);
   
-              header('Content-Type: application/json; charset=utf-8');
-              echo json_encode(["sucesso" => true, "mensagem" => "Login realizado com sucesso"]);
+              // Check if request is AJAX or direct browser request
+              $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+                      strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+              
+              if ($isAjax) {
+                  // For AJAX requests, return JSON
+                  header('Content-Type: application/json; charset=utf-8');
+                  echo json_encode(["sucesso" => true, "mensagem" => "Login realizado com sucesso"]);
+              } else {
+                  // For direct browser requests, redirect
+                  header('Location: views/restricted/principal_interna.php');
+                  exit;
+              }
           } else {
               http_response_code(401);
               echo json_encode(["sucesso" => false, "mensagem" => "Email ou senha inválidos"]);

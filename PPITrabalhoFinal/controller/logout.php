@@ -1,14 +1,11 @@
 <?php
 // Arquivo: logout.php
-// Inicia a sessão
+require_once "../utils/sessao.php";
 
-// Remove todas as variáveis de sessão
-session_unset();
+// Destrói a sessão usando a função específica
+destruirSessao();
 
-// Destrói a sessão
-session_destroy();
-
-// Redireciona para a página de login
-header('Location: login.php');
+// Redireciona para a página inicial usando URL completa
+header('Location: ../index.html');
 exit;
 ?>
