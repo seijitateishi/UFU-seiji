@@ -1,7 +1,7 @@
 body {
     background-color: #ddd;
     color: #444;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: "Helvetica";
     line-height: 1.5;
     width: 60%;
     margin: 0 auto;
@@ -9,7 +9,7 @@ body {
 }
 
 main {
-    background-color: #fff;
+    background-color: white;
     padding: 20px;
 }
 
@@ -17,8 +17,17 @@ h1, h2 {
     color: rgb(140, 76, 8);
 }
 
+h1 + p:first-of-type,
+h2 + p:first-of-type {
+    text-indent: 2rem;
+}
+
 section {
     margin-top: 0px;
     padding-bottom: 5px;
     border-top: solid 1px gray;
+}
+
+#experiencia{
+    font-weight: bold;
 }

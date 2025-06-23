@@ -1,17 +1,34 @@
+input[required] {
+    background-color: #fffacd;
+}
+
+input[id="nome"]:invalid,
+input[id="cpf"]:invalid,
+input[id="cep"]:invalid {
+    background-color: lightcoral
+}
+
+/* 10. Cor de fundo para campos textuais com conteúdo VÁLIDO */
+input[id="nome"]:valid,
+input[id="cpf"]:valid,
+input[id="cep"]:valid {
+    background-color: lightgreen;
+}
+
 input[id="nome"]:invalid + span::after,
-input[id="email"]:invalid + span::after,
 input[id="cpf"]:invalid + span::after,
 input[id="cep"]:invalid + span::after{
     content: "✖";
     color: red;
+    
 }
 
 input[id="nome"]:valid + span::after,
-input[id="email"]:valid + span::after,
 input[id="cpf"]:valid + span::after,
 input[id="cep"]:valid + span::after {
     content: "✓";
     color: green;
+    background-color: lightgreen;
 }
 
 
@@ -66,4 +83,15 @@ section:first-child {
 
 label:first-of-type {
     font-weight: bold;
+}
+
+fieldset{
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+:placeholder-shown{
+    color: gray;
+    font-style: italic;
 }
