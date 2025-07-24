@@ -36,7 +36,7 @@ main{
     border: #a3a3a3 1px solid;
     width: 70%;
     padding: 5%;
-    margin: auto;
+    margin: 0 auto;
 }
 footer{
     text-align: center;
