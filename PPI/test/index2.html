@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Presidas do BR</title>
+
+    <!-- Usando CSS externo... -->
+    <!-- <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+
+    <!-- Usando CSS interno... -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: lightgray;
+
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: gray;
+            color: white;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 70%;
+            margin: 0 auto;
+            border-radius: 5px;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        main {
+            box-sizing: border-box;
+
+            /* flex-grow: 1; */
+            /* main cresce ate preencher o espaco */
+        }
+
+        main {
+            width: 70%;
+            margin: 0 auto;
+            gap: 15px;
+
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        main > div {
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: white;
+            flex-grow: 1;
+            box-shadow: 5px 5px 5px gray;
+            border-radius: 5px;
+            padding: 10px;
+
+            & h2 {
+                color: blue;
+            }
+
+            & span {
+                color: red;
+                font-weight: 900;
+            };
+
+            p {
+                max-width: 400px;
+            }
+        }
+
+        /* Seleciona 'sections' q sao filhos diretos de 'main' */
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: white;
+            width: 70%;
+            margin: 0 auto;
+            border-radius: 5px;
+        }
+
+        @media screen and (max-width: 550px){
+            nav, footer {
+                display: none;
+            };
+
+            main { 
+                width: 100%;
+                margin: 0 auto;
+            };
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <header>
+    </header> -->
+
+    <nav>
+        <input type="text" id="name" name="name" placeholder="Blablablabla">
+        <span></span>
+
+        <button>Filtrar</button>
+    </nav>
+
+    <main>
+        <div>
+            <h2>Prova</h2>
+            <p> expedita veritatis deserunt quis maxime dolor! Tempore, itaque.</p>
+            <span>R$ 1200</span>
+        </div>
+
+        <div>
+            <h2>Outra coisa</h2>
+            <p> quibusdam est nulla velit officia dolor? Magnam fugit labore dolorum consequuntur.</p>
+            <span>R$ 1200</span>
+        </div>
+
+        <div>
+            <h2>Muito massa</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe</p>
+            <span>R$ 1200</span>
+        </div>
+
+        <div>
+            <h2>Zerei a prova</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates nulla qui eveniet </p>
+            <span>R$ 1200</span>
+        </div>
+
+        <div>
+            <h2>Paia</h2>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates nulla qui eveniet </p>
+            <span>R$ 1200</span>
+        </div>
+    </main>
+
+    <footer>
+        <p>Rodape</p>
+    </footer>
+
+    <script>
+        document.querySelector('nav > button').addEventListener('click', function(event){
+            const textFromIn = document.querySelector('nav > input').value.toLowerCase();
+            const allCards = document.querySelectorAll('main > div');
+            
+            allCards.forEach((c) => {
+                let title = c.querySelector('h2').innerText.toLowerCase();
+                
+                if(!title.includes(`${textFromIn}`)){
+                    c.style.display = 'none';
+                }else{
+                    c.style.display = 'flex';
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
