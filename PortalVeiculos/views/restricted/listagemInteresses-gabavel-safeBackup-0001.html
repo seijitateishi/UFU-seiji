@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="stylesheet" href="../css/listagemInteresses.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal Veiculos - Interessados no anúncio">
+    <title>Portal Veiculos - Interessados no Anúncio</title>
+</head>
+
+<body>
+    <header>
+        <h1>Portal Veiculos</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="mainUserPage.html">Dashboard</a></li>
+            <li><a href="criaAnuncios.html">Criar Anúncio</a></li>
+            <li><a href="listagemAnuncios.html">Meus Anúncios</a></li>
+            <li><a href="../public/home.html">Home</a></li>
+            <li><a href="#" id="logoutLink">Sair</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="breadcrumb">
+            <a href="listagemAnuncios.html">← Meus Anúncios</a>
+            <span>/</span>
+            <a href="detalhesAnuncio.html">Fiat Uno 2018</a>
+            <span>/</span>
+            <span>Interessados</span>
+        </div>
+
+        <div class="page-header">
+            <div class="title-section">
+                <h2>Interessados no Anúncio</h2>
+                <div class="vehicle-info">
+                    <span class="vehicle-title">Fiat Uno 2018</span>
+                    <span class="vehicle-price">R$ 35.000,00</span>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Total de Interessados</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">2</span>
+                    <span class="stat-label">Novos</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">1</span>
+                    <span class="stat-label">Respondidos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <select id="filtroStatus" name="filtroStatus">
+                <option value="">Todos os Status</option>
+                <option value="novo">Novos</option>
+                <option value="respondido">Respondidos</option>
+                <option value="arquivado">Arquivados</option>
+            </select>
+            <select id="filtroData" name="filtroData">
+                <option value="">Todas as Datas</option>
+                <option value="hoje">Hoje</option>
+                <option value="ontem">Ontem</option>
+                <option value="semana">Última Semana</option>
+                <option value="mes">Último Mês</option>
+            </select>
+            <input type="text" id="buscaNome" placeholder="Buscar por nome..." />
+            <button class="btn-export">📊 Exportar Lista</button>
+        </div>
+
+        <div class="interests-container">
+            <!-- Interesse 1 - Novo -->
+            <div class="interest-card" data-status="novo">
+                <div class="card-header">
+                    <div class="status-section">
+                        <span class="status-badge status-novo">Novo</span>
+                        <span class="priority-badge priority-alta">Alta Prioridade</span>
+                    </div>
+                    <div class="date-section">
+                        <span class="interest-date">Hoje, 14:30</span>
+                        <span class="interest-id">#INT-001</span>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="contact-info">
+                        <div class="contact-name">
+                            <h3>João Silva</h3>
+                            <span class="verified-badge">✓ Verificado</span>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon">📱</span>
+                                <span class="contact-value">(34) 99999-1234</span>
+                                <button class="btn-copy" title="Copiar telefone">📋</button>
+                            </div>
+                            <div class="contact-item">
+                                <span class="contact-icon">📧</span>
+                                <span class="contact-value">joao.silva@email.com</span>
+                                <button class="btn-copy" title="Copiar email">📋</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-section">
+                        <h4>Mensagem:</h4>
+                        <div class="message-content">
+                            <p>Olá! Tenho muito interesse no seu Fiat Uno 2018. Gostaria de agendar uma visita para
+                                conhecer o veículo pessoalmente. Posso ir qualquer dia da semana no período da tarde.
+                                Também gostaria de saber se aceita financiamento e se há possibilidade de negociar o
+                                preço. Aguardo retorno!</p>
+                        </div>
+                        <div class="message-stats">
+                            <span class="word-count">42 palavras</span>
+                            <span class="sentiment positive">😊 Positivo</span>
+                        </div>
+                    </div>
+
+                    <div class="additional-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Localização:</span>
+                                <span class="info-value">Uberlândia, MG</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Meio de Contato Preferido:</span>
+                                <span class="info-value">WhatsApp</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Disponibilidade:</span>
+                                <span class="info-value">Tardes (Seg-Sex)</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Interesse em Financiamento:</span>
+                                <span class="info-value">Sim</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="responderInteresse(1)">
+                        💬 Responder
+                    </button>
+                    <button class="btn-success" onclick="marcarContato(1)">
+                        ✓ Marcar como Contatado
+                    </button>
+                    <button class="btn-warning" onclick="agendarVisita(1)">
+                        📅 Agendar Visita
+                    </button>
+                    <button class="btn-info" onclick="criarNegociacao(1)">
+                        💰 Iniciar Negociação
+                    </button>
+                    <button class="btn-secondary" onclick="arquivarInteresse(1)">
+                        📁 Arquivar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interesse 2 - Novo -->
+            <div class="interest-card" data-status="novo">
+                <div class="card-header">
+                    <div class="status-section">
+                        <span class="status-badge status-novo">Novo</span>
+                        <span class="priority-badge priority-media">Média Prioridade</span>
+                    </div>
+                    <div class="date-section">
+                        <span class="interest-date">Ontem, 16:45</span>
+                        <span class="interest-id">#INT-002</span>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="contact-info">
+                        <div class="contact-name">
+                            <h3>Maria Santos</h3>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon">📱</span>
+                                <span class="contact-value">(11) 98765-4321</span>
+                                <button class="btn-copy" title="Copiar telefone">📋</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-section">
+                        <h4>Mensagem:</h4>
+                        <div class="message-content">
+                            <p>Boa tarde! Vi seu anúncio do Uno e me interessei. Você aceita troca por outro veículo?
+                                Tenho um Gol 2015 em bom estado. Obrigada!</p>
+                        </div>
+                        <div class="message-stats">
+                            <span class="word-count">25 palavras</span>
+                            <span class="sentiment neutral">😐 Neutro</span>
+                        </div>
+                    </div>
+
+                    <div class="additional-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Localização:</span>
+                                <span class="info-value">São Paulo, SP</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Meio de Contato Preferido:</span>
+                                <span class="info-value">Telefone</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Interesse em Troca:</span>
+                                <span class="info-value">Sim (Gol 2015)</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Disponibilidade:</span>
+                                <span class="info-value">Fins de semana</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="responderInteresse(2)">
+                        💬 Responder
+                    </button>
+                    <button class="btn-success" onclick="marcarContato(2)">
+                        ✓ Marcar como Contatado
+                    </button>
+                    <button class="btn-warning" onclick="agendarVisita(2)">
+                        📅 Agendar Visita
+                    </button>
+                    <button class="btn-info" onclick="criarNegociacao(2)">
+                        💰 Iniciar Negociação
+                    </button>
+                    <button class="btn-secondary" onclick="arquivarInteresse(2)">
+                        📁 Arquivar
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interesse 3 - Respondido -->
+            <div class="interest-card" data-status="respondido">
+                <div class="card-header">
+                    <div class="status-section">
+                        <span class="status-badge status-respondido">Respondido</span>
+                        <span class="priority-badge priority-baixa">Baixa Prioridade</span>
+                    </div>
+                    <div class="date-section">
+                        <span class="interest-date">25/07/2025, 09:15</span>
+                        <span class="interest-id">#INT-003</span>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="contact-info">
+                        <div class="contact-name">
+                            <h3>Carlos Oliveira</h3>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <span class="contact-icon">📱</span>
+                                <span class="contact-value">(34) 99876-5432</span>
+                                <button class="btn-copy" title="Copiar telefone">📋</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="message-section">
+                        <h4>Mensagem:</h4>
+                        <div class="message-content">
+                            <p>Olá, gostaria de mais informações sobre o veículo. Obrigado!</p>
+                        </div>
+                        <div class="message-stats">
+                            <span class="word-count">11 palavras</span>
+                            <span class="sentiment neutral">😐 Neutro</span>
+                        </div>
+                    </div>
+
+                    <div class="response-info">
+                        <h4>Última Resposta:</h4>
+                        <div class="response-content">
+                            <p><strong>Você:</strong> Olá Carlos! O veículo está em excelente estado. Podemos agendar
+                                uma visita? (Enviado em 25/07/2025, 14:30)</p>
+                        </div>
+                    </div>
+
+                    <div class="additional-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Localização:</span>
+                                <span class="info-value">Araguari, MG</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status do Contato:</span>
+                                <span class="info-value">Aguardando retorno</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Último Contato:</span>
+                                <span class="info-value">3 dias atrás</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Tentativas de Contato:</span>
+                                <span class="info-value">2 tentativas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="responderInteresse(3)">
+                        💬 Enviar Follow-up
+                    </button>
+                    <button class="btn-warning" onclick="agendarVisita(3)">
+                        📅 Reagendar Visita
+                    </button>
+                    <button class="btn-info" onclick="verHistorico(3)">
+                        📜 Ver Histórico
+                    </button>
+                    <button class="btn-secondary" onclick="arquivarInteresse(3)">
+                        📁 Arquivar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-section">
+            <h3>Resumo de Atividades</h3>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-icon">📧</div>
+                    <div class="summary-content">
+                        <span class="summary-title">Emails Enviados</span>
+                        <span class="summary-value">5</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">📞</div>
+                    <div class="summary-content">
+                        <span class="summary-title">Ligações Realizadas</span>
+                        <span class="summary-value">3</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">📅</div>
+                    <div class="summary-content">
+                        <span class="summary-title">Visitas Agendadas</span>
+                        <span class="summary-value">1</span>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">💰</div>
+                    <div class="summary-content">
+                        <span class="summary-title">Negociações Ativas</span>
+                        <span class="summary-value">2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-state" style="display: none;">
+            <div class="empty-icon">📭</div>
+            <h3>Nenhum interesse encontrado</h3>
+            <p>Ainda não há interessados para este anúncio ou nenhum interesse corresponde aos filtros selecionados.</p>
+            <div class="empty-actions">
+                <button class="btn-promote">📢 Promover Anúncio</button>
+                <button class="btn-share">📤 Compartilhar Anúncio</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Venda de carros roubados
+        </p>
+    </footer>
+
+    <script src="../js/listagemInteresses.js"></script>
+</body>
+
+</html>

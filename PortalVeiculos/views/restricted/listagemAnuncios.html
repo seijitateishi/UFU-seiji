@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="../css/listagemAnuncios.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal Veiculos - Meus anúncios de veículos">
+    <title>Portal Veiculos - Meus Anúncios</title>
+</head>
+<body>
+    <header>
+        <h1>Portal Veiculos</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="mainUserPage.html">Dashboard</a></li>
+            <li><a href="criaAnuncios.html">Criar Anúncio</a></li>
+            <li><a href="listagemAnuncios.html">Meus Anúncios</a></li>
+            <li><a href="../public/home.html">Home</a></li>
+            <li><a href="#" id="logoutLink">Sair</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="page-header">
+            <h2>Meus Anúncios</h2>
+            <div class="header-actions">
+                <a href="criaAnuncios.html" class="btn-new-ad">+ Novo Anúncio</a>
+                <div class="stats">
+                    <span class="stat-item">Total: <strong>3</strong></span>
+                    <span class="stat-item">Ativos: <strong>2</strong></span>
+                    <span class="stat-item">Pausados: <strong>1</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <select id="filtroStatus" name="filtroStatus">
+                <option value="">Todos os Status</option>
+                <option value="ativo">Ativos</option>
+                <option value="pausado">Pausados</option>
+                <option value="vendido">Vendidos</option>
+            </select>
+            <select id="filtroMarca" name="filtroMarca">
+                <option value="">Todas as Marcas</option>
+                <option value="fiat">Fiat</option>
+                <option value="ford">Ford</option>
+                <option value="chevrolet">Chevrolet</option>
+                <option value="toyota">Toyota</option>
+            </select>
+            <input type="text" id="buscaModelo" placeholder="Buscar por modelo..." />
+        </div>
+
+        <div class="anuncios-container">
+            <!-- Anúncio 1 - Ativo -->
+            <div class="anuncio-card" data-status="ativo">
+                <div class="card-header">
+                    <span class="status-badge status-ativo">Ativo</span>
+                    <span class="date-created">Criado em: 15/07/2025</span>
+                </div>
+                
+                <div class="card-image">
+                    <img src="../../images/tiopatinhas.jpg" alt="Fiat Uno 2018">
+                    <div class="image-overlay">
+                        <span class="views-count">👁 24 visualizações</span>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="car-info">
+                        <div class="car-brand-model">
+                            <h3 class="brand">Fiat</h3>
+                            <h3 class="model">Uno</h3>
+                        </div>
+                        <div class="car-year">2018</div>
+                    </div>
+                    
+                    <div class="car-details">
+                        <span class="price">R$ 35.000,00</span>
+                        <span class="location">📍 Uberlândia, MG</span>
+                        <span class="mileage">🛣 45.000 km</span>
+                    </div>
+                    
+                    <div class="interest-info">
+                        <span class="interest-count">💬 3 interessados</span>
+                        <span class="last-contact">Último contato: hoje</span>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn-view" data-id="1" title="Ver detalhes">
+                        👁 Detalhes
+                    </button>
+                    <button class="btn-interests" data-id="1" title="Ver interessados">
+                        💬 Interesses (3)
+                    </button>
+                    <button class="btn-edit" data-id="1" title="Editar anúncio">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn-pause" data-id="1" title="Pausar anúncio">
+                        ⏸️ Pausar
+                    </button>
+                    <button class="btn-delete" data-id="1" title="Excluir anúncio">
+                        🗑️ Excluir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Anúncio 2 - Ativo -->
+            <div class="anuncio-card" data-status="ativo">
+                <div class="card-header">
+                    <span class="status-badge status-ativo">Ativo</span>
+                    <span class="date-created">Criado em: 10/07/2025</span>
+                </div>
+                
+                <div class="card-image">
+                    <img src="../../images/tiopatinhas.jpg" alt="Ford Focus 2020">
+                    <div class="image-overlay">
+                        <span class="views-count">👁 18 visualizações</span>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="car-info">
+                        <div class="car-brand-model">
+                            <h3 class="brand">Ford</h3>
+                            <h3 class="model">Focus</h3>
+                        </div>
+                        <div class="car-year">2020</div>
+                    </div>
+                    
+                    <div class="car-details">
+                        <span class="price">R$ 68.000,00</span>
+                        <span class="location">📍 São Paulo, SP</span>
+                        <span class="mileage">🛣 28.000 km</span>
+                    </div>
+                    
+                    <div class="interest-info">
+                        <span class="interest-count">💬 7 interessados</span>
+                        <span class="last-contact">Último contato: ontem</span>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn-view" data-id="2" title="Ver detalhes">
+                        👁 Detalhes
+                    </button>
+                    <button class="btn-interests" data-id="2" title="Ver interessados">
+                        💬 Interesses (7)
+                    </button>
+                    <button class="btn-edit" data-id="2" title="Editar anúncio">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn-pause" data-id="2" title="Pausar anúncio">
+                        ⏸️ Pausar
+                    </button>
+                    <button class="btn-delete" data-id="2" title="Excluir anúncio">
+                        🗑️ Excluir
+                    </button>
+                </div>
+            </div>
+
+            <!-- Anúncio 3 - Pausado -->
+            <div class="anuncio-card" data-status="pausado">
+                <div class="card-header">
+                    <span class="status-badge status-pausado">Pausado</span>
+                    <span class="date-created">Criado em: 05/07/2025</span>
+                </div>
+                
+                <div class="card-image">
+                    <img src="../../images/tiopatinhas.jpg" alt="Toyota Corolla 2019">
+                    <div class="image-overlay">
+                        <span class="views-count">👁 42 visualizações</span>
+                    </div>
+                </div>
+                
+                <div class="card-content">
+                    <div class="car-info">
+                        <div class="car-brand-model">
+                            <h3 class="brand">Toyota</h3>
+                            <h3 class="model">Corolla</h3>
+                        </div>
+                        <div class="car-year">2019</div>
+                    </div>
+                    
+                    <div class="car-details">
+                        <span class="price">R$ 85.000,00</span>
+                        <span class="location">📍 Rio de Janeiro, RJ</span>
+                        <span class="mileage">🛣 35.000 km</span>
+                    </div>
+                    
+                    <div class="interest-info">
+                        <span class="interest-count">💬 12 interessados</span>
+                        <span class="last-contact">Último contato: 3 dias atrás</span>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn-view" data-id="3" title="Ver detalhes">
+                        👁 Detalhes
+                    </button>
+                    <button class="btn-interests" data-id="3" title="Ver interessados">
+                        💬 Interesses (12)
+                    </button>
+                    <button class="btn-edit" data-id="3" title="Editar anúncio">
+                        ✏️ Editar
+                    </button>
+                    <button class="btn-activate" data-id="3" title="Reativar anúncio">
+                        ▶️ Reativar
+                    </button>
+                    <button class="btn-delete" data-id="3" title="Excluir anúncio">
+                        🗑️ Excluir
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="empty-state" style="display: none;">
+            <div class="empty-icon">📝</div>
+            <h3>Nenhum anúncio encontrado</h3>
+            <p>Você ainda não criou nenhum anúncio ou nenhum anúncio corresponde aos filtros selecionados.</p>
+            <a href="criaAnuncios.html" class="btn-create-first">Criar Primeiro Anúncio</a>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Venda de carros roubados</p>
+    </footer>
+    
+    <!-- <script src=""></script> -->
+</body>
+</html>
